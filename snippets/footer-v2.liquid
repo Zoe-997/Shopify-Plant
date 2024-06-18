@@ -1,0 +1,22 @@
+<footer class="footer-v1 footer-v2">
+  <div class="container {% if settings.fv2_layout == "normal" %}container-ver2{% endif %}">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="footer-top footer-tov2">
+          {% if settings.fv2_copyright == blank %}
+          <p>Copyright &copy; {{ 'now' | date: "%Y" }} by 
+            <a href="http://shopilaunch.com" title="ShopiLaunch" target="_blank">ShopiLaunch</a>. 
+            <span>{{ powered_by_link }}</span></p>
+          {% else %}
+          <p>{{settings.fv2_copyright}}</p>
+          {% endif %}
+          <ul class="contact-info">
+            {% for link in linklists[settings.fv2_info_menu].links %}
+            <li><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

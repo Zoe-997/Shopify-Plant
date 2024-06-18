@@ -1,0 +1,91 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-policy-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="slider-show">
+    <div class="container container-ver2 space-50">
+      <div class="shipping-v2 home3-shiping space-50">
+        {%for block in section.blocks %}
+        <div class="col-md-3 col-sm-3 col-xs-6">
+
+          <img {%if block.settings.icon_policy == blank%} src="{{'icon_policy.png'| asset_url }}" {%else%}src="{{block.settings.icon_policy|img_url:'master'}}" {%endif%} alt="policy" >
+
+          <h3>{{block.settings.policy_text_1}}</h3>
+          <p>{{block.settings.policy_text_2}}</p>
+        </div>
+        {%endfor%}
+
+
+      </div>
+      <!-- End container -->
+    </div>
+  </section>
+</div>
+
+
+{% schema %}
+{
+  "name": "Policy v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "policy",
+      "name": "Policy",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_policy",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "policy_text_1",
+          "label": "Text 1",
+          "default": "FREE SHIPPING"
+        },
+        {
+          "type": "text",
+          "id": "policy_text_2",
+          "label": "Text 2",
+          "default": "ON ORDER OVER $500"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Policy v1",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "policy"
+        },
+        {
+          "type": "policy"
+        },
+        {
+          "type": "policy"
+        },
+        {
+          "type": "policy"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
