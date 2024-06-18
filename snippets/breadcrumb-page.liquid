@@ -1,0 +1,73 @@
+<div class="container container-ver2" style="padding: 0;">
+  <div class="banner-header-cart">
+    <div class="text">
+      <h3>{% if template contains 'product' %}
+        
+        {% elsif template contains 'collection' and collection.handle %}
+
+        {% elsif template == 'blog' %}
+        {{ blog.title }}
+        {% elsif template == 'article' %}
+        {{ article.title }}
+        {% elsif template contains 'page' %}
+        {{ page.title }}
+        {% else %}
+        {{ page_title }}
+        {% endif %}
+      </h3>
+      <p> <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+        {% if template contains 'product' %}
+
+        {% if collection %}
+        <i class="fa fa-caret-right"></i>
+        {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+        {% endif %}
+        {% endif %}
+        <i class="fa fa-caret-right"></i>
+        {{ product.title }}
+        {% elsif template contains 'collection' and collection.handle %}
+
+        <i class="fa fa-caret-right"></i>
+        {% if current_tags %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+        <i class="fa fa-caret-right"></i>
+        {{ current_tags | join: " + " }}
+        {% else %}
+        {{ collection.title }}
+        {% endif %}
+        {% elsif template == 'blog' %}
+
+        <i class="fa fa-caret-right"></i>
+        {% if current_tags %}
+        {{ blog.title | link_to: blog.url }}
+        <i class="fa fa-caret-right"></i>
+        {{ current_tags | join: " + " }}
+        {% else %}
+        {{ blog.title }}
+        {% endif %}
+        {% elsif template == 'article' %}
+
+        <i class="fa fa-caret-right"></i>
+        {{ blog.title | link_to: blog.url }}
+        <i class="fa fa-caret-right"></i>
+        {{ article.title }}
+
+        {% elsif template contains 'page' %}
+
+        <i class="fa fa-caret-right"></i>
+        {{ page.title }}
+
+        {% else %}
+
+        <i class="fa fa-caret-right"></i>
+        {{ page_title }}
+
+        {% endif %}
+
+      </p>
+    </div>
+  </div>
+</div>

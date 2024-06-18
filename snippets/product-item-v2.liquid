@@ -1,0 +1,39 @@
+
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.sale' | t %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% assign sold_out_text = 'products.product.sold_out' | t %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %} 
+
+
+<div class="product">
+  <div class="product-images">
+     <a class="product-images" href="{{product.url}}" title="">
+            <img class="primary_image" src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
+             {% for image in product.images %}
+              {% if forloop.last == true %}
+              <img class="secondary_image" src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
+              {%endif%}
+              {% endfor %}
+        </a>
+  </div>
+    <a href="{{ product.url | within: collection }}" title="{{product.title}}"><p class="product-title">{{product.title}}</p></a>
+  {% capture price %}{{ product.price | money }}{% endcapture %}
+  
+  {% if on_sale %}
+  <p class="product-price-old">{{ product.compare_at_price | money }}</p>
+  
+  {% endif %}
+  {% if product.price_varies %}
+  <p class="product-price">{{ 'products.general.from_text_html' | t: price: price }}</p>
+  {% else %}
+   <p class="product-price">{{ price }}</p>
+  {% endif %}
+
+</div>

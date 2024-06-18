@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="error-wrapper" style="background-image: url({% if settings.error_bg_img == blank %}https://placehold.it/1860x1012{% else %}{{settings.error_bg_img|img_url:'master'}}{% endif %});">
+        <div class="error-content text-center">
+          <p><img src="{% if settings.error_icon_img == blank %}https://placehold.it/796x315{% else %}{{settings.error_icon_img|img_url:'master'}}{% endif %}" alt="" class="img-responsive text-center"></p>
+          <h3>{{settings.error_text1}}</h3>
+          <p>{{settings.error_text2}}<a href="{{settings.error_btn_url}}">{{settings.error_btn_name}}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

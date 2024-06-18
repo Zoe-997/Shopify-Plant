@@ -1,0 +1,91 @@
+{% if template == 'index' %}
+
+  {% if section.settings.footer_in_homepage =='footer_v1'%}
+  	{% include 'footer-v1' %}
+  {% elsif section.settings.footer_in_homepage =='footer_v2'%}
+  	{% include 'footer-v2' %}
+  {% elsif section.settings.footer_in_homepage =='footer_v3'%}
+  	{% include 'footer-v3' %}
+  {% elsif section.settings.footer_in_homepage =='footer_v4'%}
+  	{% include 'footer-v4' %}
+  {% elsif section.settings.footer_in_homepage =='footer_v5'%}
+  	{% include 'footer-v5' %}
+  {% endif %}
+
+{% else %}
+
+  {% if section.settings.footer_in_orther_page =='footer_v1'%}
+  	{% include 'footer-v1' %}
+  {% elsif section.settings.footer_in_orther_page =='footer_v2'%}
+  	{% include 'footer-v2' %}
+  {% elsif section.settings.footer_in_orther_page =='footer_v3'%}
+  	{% include 'footer-v3' %}
+  {% elsif section.settings.footer_in_orther_page =='footer_v4'%}
+  	{% include 'footer-v4' %}
+  {% elsif section.settings.footer_in_orther_page =='footer_v5'%}
+  	{% include 'footer-v5' %}
+  {% endif %}
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "select",
+      "id": "footer_in_homepage",
+      "label": "Footer in Homepage",
+      "options": [
+        {
+          "value": "footer_v1",
+          "label": "Footer v1"
+        },
+        {
+          "value": "footer_v2",
+          "label": "Footer v2"
+        },
+        {
+          "value": "footer_v3",
+          "label": "Footer v3"
+        },
+        {
+          "value": "footer_v4",
+          "label": "Footer v4"
+        },
+        {
+          "value": "footer_v5",
+          "label": "Footer v5"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "footer_in_orther_page",
+      "label": "Footer in Orther page",
+      "options": [
+        {
+          "value": "footer_v1",
+          "label": "Footer v1"
+        },
+        {
+          "value": "footer_v2",
+          "label": "Footer v2"
+        },
+        {
+          "value": "footer_v3",
+          "label": "Footer v3"
+        },
+        {
+          "value": "footer_v4",
+          "label": "Footer v4"
+        },
+        {
+          "value": "footer_v5",
+          "label": "Footer v5"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
