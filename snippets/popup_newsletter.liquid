@@ -1,0 +1,54 @@
+{% if template == 'index' %}
+{% if settings.enable_pnewsletter %}
+<div class="popup-content hidden-sm hidden-xs engoj-popup-newsletter">
+  <div class="popup-content-wrapper">
+    <div class="popup-container">
+      <div class="col-md-6 col-sm-6 images">
+        <div class="engoc-absolution">
+          <img class="img-responsive" src="{% if settings.pnewsletter_bg_img == blank %}https://placehold.it/655x690{% else %}{{settings.pnewsletter_bg_img|img_url:'master'}}{% endif %}" alt="newsletter">
+        </div>
+      </div>
+      <div class="col-md-7 col-sm-6 text">
+        <div class="popup-content-text">
+          <a href="#" class="close-popup engoj_newletter_close"></a>
+          <h3>{{settings.pnewsletter_title}}</h3>
+          <h4>{{settings.pnewsletter_content1}}</h4>
+          <p>{{settings.pnewsletter_content2}}</p>
+        </div>
+
+        {% if settings.newsletter_form_action != blank %}
+        {% assign form_action = settings.newsletter_form_action %}
+        {% else %}
+        {% assign form_action = '//myshopify.us12.list-manage.com/subscribe/post?u=9ade7b39da179308b891bd263&amp;id=e9dbec7f92' %}
+        {% endif %}
+        <div class="newletter-form">
+          <form action="{{ form_action }}" method="post">
+            <p>
+              <input type="email" value="" placeholder="{{settings.pnewsletter_placeholder}}" title="{{settings.pnewsletter_placeholder}}" name="EMAIL">
+            </p>
+            <button type="submit" value="{{settings.pnewsletter_btn_name}}" class="">{{settings.pnewsletter_btn_name}}<i class="link-icon-white"></i></button>
+          </form>
+        </div>
+        <label class="not-again engoj_newletter_close"><span>{{settings.pnewsletter_closetext}}</span></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (!jQuery.cookie('plant_pop_newletter') || jQuery.cookie('plant_pop_newletter') == null) {    
+    jQuery(window).load(function() {
+      setTimeout($('.engoj-popup-newsletter').show(), 300 * 1000);
+      jQuery('.engoj_newletter_close').click(function(e) {
+        e.preventDefault();
+        jQuery('.engoj-popup-newsletter').hide(); 
+        jQuery.cookie('plant_pop_newletter', '1', {expires: 1, path:'/', domain: '{{shop.domain}}' });
+      });
+    });
+  } else {
+    $('.engoj-popup-newsletter').remove();
+  }
+</script>
+
+{% endif %}
+{% endif %}

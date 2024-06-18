@@ -1,0 +1,115 @@
+<!-- /snippets/collection-sidebar.liquid -->
+
+
+ {%if settings.sidebar_enable_category_collection == true %}
+
+<aside class="widget widget_product_categories">
+  <h3 class="widget-title">{{settings.sidebar_category_title}}</h3>
+  <ul class="product-categories">
+    {% for link in linklists[settings.sidebar_category_collection].links %}
+    {% assign child_list_handle = link.title | handleize %}
+    {% if linklists[child_list_handle].links != blank %}
+    <li><a href="{{link.url}}">{{link.title}}</a>
+      <ul class="children">
+        {% for childlink in linklists[child_list_handle].links %}
+        <li><a href="{{childlink.url}}">{{ childlink.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {%else%}
+    <li>
+      <a href="{{link.url}}">{{link.title}}</a>
+    </li>
+
+    {%endif%}
+    {%endfor%}
+  </ul>
+</aside>
+  {%endif%}
+
+{% if template contains 'collection' %}
+  {% if settings.filter_enable %}
+    {% include 'collection.shopby-price' %}
+    {% include 'collection.shopby-size' %}
+    {% include 'collection.shopby-color' %}
+    {% include 'collection.shopby-brand' %}
+  {% endif %}
+{% endif %}
+
+
+
+
+<div class="collection-sidebar">
+  {%if settings.bestseller_enable%}
+  <aside class="widget widget_feature">
+    <h3 class="widget-title">{{settings.bestseller_title}}</h3>
+    <ul>
+       {%for product in collections[settings.bestseller_collection].products limit: settings.bestseller_limit %}
+      {% assign on_sale = false %}
+      {% if product.compare_at_price > product.price %}
+      {% assign on_sale = true %}
+      {% endif %}
+
+      {% assign sold_out = true %}
+      {% if product.available %}
+      {% assign sold_out = false %}
+      {% endif %}
+      <li>
+        <a class="images" href="{{product.url}}" title="images">
+          <img class="img-responsive" src="{{ product.featured_image.src | img_url: 'grande' }}" alt="images">
+        </a>
+        <div class="text">
+          <h2>
+            <a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title }}</a>
+          </h2>
+          <p>
+          
+           {% capture price %}{{ product.price | money }}{% endcapture %}
+  
+            {% if on_sale %}
+          <span class="price-old">{{ product.compare_at_price | money }}</span>
+
+          {% endif %}
+          {% if product.price_varies %}
+          <span>{{ 'products.general.from_text_html' | t: price: price }}</span>
+          {% else %}
+          <span>{{ price }}</span>
+          {% endif %}
+          
+          
+          </p>
+          <p class="rating">
+           <span class=" shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          </p>
+        </div>
+      </li>
+      {%else%}
+      <li>
+        <a class="images" href="#" title="images">
+          <img class="img-responsive" src="{{'p1'|asset_url}}" alt="">
+        </a>
+        <div class="text">
+          <h2>
+            <a href="#" title="Butterfly Bar Stool">Butterfly Bar Stool</a>
+          </h2>
+          <p><span class="price-old">$700</span><span>$350</span></p>
+          <p class="rating">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+          </p>
+        </div>
+      </li>
+      {%endfor%}
+      
+    </ul>
+  </aside>
+
+{%endif%}
+                                
+          
+
+</div>
+

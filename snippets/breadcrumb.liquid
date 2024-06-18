@@ -1,0 +1,102 @@
+<!-- /snippets/breadcrumb.liquid -->
+{% comment %}
+Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+{% unless template == 'index' %}
+
+<div class="container">
+  <div class="banner-header banner-lbook3 space-30">
+
+    {% if template contains 'collection' and collection.handle %}
+    {% capture _image_1 %}breadcrumb_image_1.jpg{% endcapture %}
+    <img src="{{_image_1|asset_url}}" alt="Banner-header">
+    {% elsif  template contains 'product' %}
+    {% capture _image_2 %}breadcrumb_image_2.jpg{% endcapture %}
+    <img src="{{_image_2|asset_url}}" alt="Banner-header">
+    {% elsif template == 'cart' %}
+    {% capture _image_3 %}breadcrumb_image_3.jpg{% endcapture %}
+    <img src="{{_image_3|asset_url}}" alt="Banner-header">
+    {% elsif template == 'blog' %}
+    {% capture _image_4 %}breadcrumb_image_4.jpg{% endcapture %}
+    <img src="{{_image_4|asset_url}}" alt="Banner-header">
+    {% elsif template contains 'page' %}
+    {% capture _image_5 %}breadcrumb_image_5.jpg{% endcapture %}
+    <img src="{{_image_5|asset_url}}" alt="Banner-header">
+    {% else %}
+    {% capture _image_6 %}breadcrumb_image_6.jpg{% endcapture %}
+    <img src="{% if settings.account_bg == blank %}{{_image_6|asset_url}}{% else %}{{settings.account_bg|img_url:'master'}}{% endif %}" alt="Banner-header">
+    {% endif %}
+    <div class="text">
+      <h3>{% if template contains 'product' %}
+        {{ product.title }}
+        {% elsif template contains 'collection' and collection.handle %}
+        {{ collection.title }}
+        {% elsif template == 'blog' %}
+        {{ blog.title }}
+        {% elsif template == 'article' %}
+        {{ article.title }}
+        {% elsif template contains 'page' %}
+        {{ page.title }}
+        {% else %}
+        {{ page_title }}
+        {% endif %}
+      </h3>
+      <p> <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+        {% if template contains 'product' %}
+
+        {% if collection %}
+        <i class="fa fa-caret-right"></i>
+        {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+        {% endif %}
+        {% endif %}
+        <i class="fa fa-caret-right"></i>
+        {{ product.title }}
+        {% elsif template contains 'collection' and collection.handle %}
+
+        <i class="fa fa-caret-right"></i>
+        {% if current_tags %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+        <i class="fa fa-caret-right"></i>
+        {{ current_tags | join: " + " }}
+        {% else %}
+        {{ collection.title }}
+        {% endif %}
+        {% elsif template == 'blog' %}
+
+        <i class="fa fa-caret-right"></i>
+        {% if current_tags %}
+        {{ blog.title | link_to: blog.url }}
+        <i class="fa fa-caret-right"></i>
+        {{ current_tags | join: " + " }}
+        {% else %}
+        {{ blog.title }}
+        {% endif %}
+        {% elsif template == 'article' %}
+
+        <i class="fa fa-caret-right"></i>
+        {{ blog.title | link_to: blog.url }}
+        <i class="fa fa-caret-right"></i>
+        {{ article.title }}
+
+        {% elsif template contains 'page' %}
+
+        <i class="fa fa-caret-right"></i>
+        {{ page.title }}
+
+        {% else %}
+
+        <i class="fa fa-caret-right"></i>
+        {{ page_title }}
+
+        {% endif %}
+
+      </p>
+    </div>
+  </div>
+</div>
+
+
+{% endunless %}

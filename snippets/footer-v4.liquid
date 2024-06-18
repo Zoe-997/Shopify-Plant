@@ -1,0 +1,20 @@
+<footer class="footer-v1 footer-v2 footer-v3 footer-v4 {% if settings.fv4_overlay %}footer-bottom-absolute{% endif %}">
+  <div class="container {% if settings.fv4_layout == "normal" %}container-ver2{% endif %}">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="footer-top footer-tov2">
+          {% if settings.fv4_copyright == blank %}
+          <p>Copyright &copy; {{ 'now' | date: "%Y" }} by 
+            <a href="http://shopilaunch.com" title="ShopiLaunch" target="_blank">ShopiLaunch</a>. 
+            <span>{{ powered_by_link }}</span></p>
+          {% else %}
+          <p>{{settings.fv4_copyright}}</p>
+          {% endif %}
+           <ul class="social">
+            {{settings.fv4_social}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
