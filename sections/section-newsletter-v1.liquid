@@ -1,0 +1,94 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-newsletter-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-newsletter">
+    <div class="container container-ver2">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="newsletter-wrapper">
+            <h3 class="text-center">{{section.settings.newletter_title}}</h3>
+            <p class="text-center">{{section.settings.newletter_des}}</p>
+            
+            {% if settings.newsletter_form_action != blank %}
+            {% assign form_action = settings.newsletter_form_action %}
+            {% else %}
+            {% assign form_action = '#' %}
+            {% endif %}
+            
+            <form action="{{form_action}}" class="text-center" method="post">
+              <div class="form-group">
+                <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
+              </div>
+              <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Newsletter v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme Settings tab > Mailchimp",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newletter_title",
+      "label": "Title",
+      "default": "NEWSLETTER"
+    },
+    {
+      "type": "text",
+      "id": "newletter_des",
+      "label": "Description",
+      "default": "TO GET IN TOUCH"
+    },
+    {
+      "type": "text",
+      "id": "newletter_placeholder",
+      "label": "Input placeholder ",
+      "default": "Enter your e-mail"
+    },
+    {
+      "type": "text",
+      "id": "newletter_btn_name",
+      "label": "Button name",
+      "default": "SUBSCRIBE"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter v1",
+      "category": "Newsletter"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

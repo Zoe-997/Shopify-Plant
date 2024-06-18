@@ -1,0 +1,379 @@
+<div class="about-us">
+  <div class="container"> 
+    <div class="main-img"><a href=""><img src="{% if section.settings.bg_image_breadcrumb == blank %}https://placehold.it/2048x1152{% else %}{{section.settings.bg_image_breadcrumb|img_url:'master'}}{% endif %}" alt=""></a></div>
+  </div>
+  
+  {% if section.settings.enable_block %}
+  <div class="container container-ver2">
+    <div class="row">
+      <div class="about-top">
+        <div class="col-md-6 item-typo">
+          <div class="typo clearfix">
+            <p>{{section.settings.bh_content}}</p>
+            <span><em>{{section.settings.bh_des}}</em></span>
+          </div>
+        </div>
+        <div class="col-md-7 text-ab-top">
+          <div class="text-about">
+            <h3>{{section.settings.b1_title}}</h3>
+            <p>{{section.settings.b1_content1}}</p>
+            <p>{{section.settings.b1_content2}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-bt">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="text-about">
+            <h3>{{section.settings.b2_title}}</h3>
+            <p>{{section.settings.b2_content1}}</p>
+            <p>{{section.settings.b2_content2}}</p>
+          </div>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+          <div class="text-about">
+            <h3>{{section.settings.b3_title}}</h3>
+            <p>{{section.settings.b3_content1}}</p>
+            <p>{{section.settings.b3_content2}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% if section.settings.enable_testimonial %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="testimonial-wrapper js-aboutus-testimonial" style="background: url({% if section.settings.testimonial_bg == blank %}https://placehold.it/1860x535{% else %}{{section.settings.testimonial_bg|img_url:'master'}}{% endif %}) no-repeat center; background-size: cover;">
+        {% for block in section.blocks %}
+        {% if block.type == "testimonial" %}
+        <div class="testimonial-item-wrapper">
+          <div class="testimonial-item">
+            <p class="testimonial-content">{{block.settings.t_content}}</p>
+            <h3 class="testimonial-name">{{block.settings.t_customer_name}}</h3>
+            <p class="testimonial-des">{{block.settings.t_customer_info}}</p>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if section.settings.enable_brand %}
+<div class="container container-ver2">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="brand-wrapper">
+        <div class="js-aboutus-brand">
+          {% for block in section.blocks %}
+          {% if block.type == "brand" %}
+          <div class="brand-item-wrapper">
+            <a href="{{block.settings.brand_url}}"><img src="{% if block.settings.brand_image == blank %}https://placehold.it/120x80{% else %}{{block.settings.brand_image|img_url:'master'}}{% endif %}" style="width: auto;"></a>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if section.settings.enable_newsletter %}
+<div class="section-newsletter about-section-newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter-wrapper newsletter-v2" style="background-color: {{section.settings.newsletter_bg_color}};">
+          <div class="container container-ver2">
+            <div class="row">
+              <div class="col-md-12">
+                {% if settings.newsletter_form_action != blank %}
+                {% assign form_action = settings.newsletter_form_action %}
+                {% else %}
+                {% assign form_action = '#' %}
+                {% endif %}
+
+                <form action="{{form_action}}" class="text-center" method="post">
+                  <label>
+                    <h3>{{section.settings.newletter_title}}</h3>
+                    <p>{{section.settings.newletter_des}}</p>
+                  </label>
+                  <div class="form-group">
+                    <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
+                  </div>
+                  <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "About Us page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image_breadcrumb",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Block"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_block",
+      "label": "Enable All Block?",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Block Highlight"
+    },
+    {
+      "type": "textarea",
+      "id": "bh_content",
+      "label": "Content",
+      "default": "The most important things are not things so we’ll design experiences"
+    },
+    {
+      "type": "text",
+      "id": "bh_des",
+      "label": "Description",
+      "default": "by ShopiLaunch"
+    },
+    {
+      "type": "header",
+      "content": "Block 1"
+    },
+    {
+      "type": "text",
+      "id": "b1_title",
+      "label": "Title",
+      "default": "Who We Are"
+    },
+    {
+      "type": "textarea",
+      "id": "b1_content1",
+      "label": "Content 1",
+      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    {
+      "type": "textarea",
+      "id": "b1_content2",
+      "label": "Content 2",
+      "default": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions..."
+    },
+    {
+      "type": "header",
+      "content": "Block 2"
+    },
+    {
+      "type": "text",
+      "id": "b2_title",
+      "label": "Title",
+      "default": "Vision"
+    },
+    {
+      "type": "textarea",
+      "id": "b2_content1",
+      "label": "Content 1",
+      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    {
+      "type": "textarea",
+      "id": "b2_content2",
+      "label": "Content 2",
+      "default": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions..."
+    },
+    {
+      "type": "header",
+      "content": "Block 3"
+    },
+    {
+      "type": "text",
+      "id": "b3_title",
+      "label": "Title",
+      "default": "Mission"
+    },
+    {
+      "type": "textarea",
+      "id": "b3_content1",
+      "label": "Content 1",
+      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    {
+      "type": "textarea",
+      "id": "b3_content2",
+      "label": "Content 2",
+      "default": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions..."
+    },
+    {
+      "type": "header",
+      "info": "Add testimonial below",
+      "content": "Testimonial"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_testimonial",
+      "label": "Enable Testimonial?",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "testimonial_bg",
+      "label": "Background testimonial"
+    },
+    {
+      "type": "header",
+      "info": "Add brand below",
+      "content": "Brand"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_brand",
+      "label": "Enable Brand?",
+      "default": true
+    },
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme Settings tab > Mailchimp",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "newsletter_bg_color",
+      "label": "Background color",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "text",
+      "id": "newletter_title",
+      "label": "Title",
+      "default": "NEWSLETTER"
+    },
+    {
+      "type": "text",
+      "id": "newletter_des",
+      "label": "Description",
+      "default": "TO GET IN TOUCH"
+    },
+    {
+      "type": "text",
+      "id": "newletter_placeholder",
+      "label": "Input placeholder ",
+      "default": "Enter your e-mail"
+    },
+    {
+      "type": "text",
+      "id": "newletter_btn_name",
+      "label": "Button name",
+      "default": "SUBSCRIBE"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "t_content",
+          "label": "Content",
+          "default": "I rarely write reviews for products but with the EngoCreative, I am more than grateful. The site is fully customizable and you can really feel like playing while designing the site!"
+        },
+        {
+          "type": "text",
+          "id": "t_customer_name",
+          "label": "Customer name",
+          "default": "JANATHAN VANCE"
+        },
+        {
+          "type": "text",
+          "id": "t_customer_info",
+          "label": "Customer info",
+          "default": "CEO & Founder ShopiLaunch"
+        }
+      ]
+    },
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "brand_url",
+          "label": "URL",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us page",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "brand"
+        },
+        {
+          "type": "brand"
+        },
+        {
+          "type": "brand"
+        },
+        {
+          "type": "brand"
+        },
+        {
+          "type": "brand"
+        },
+        {
+          "type": "brand"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

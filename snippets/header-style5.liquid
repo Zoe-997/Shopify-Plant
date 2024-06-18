@@ -1,0 +1,39 @@
+<header id="header" class="header-v3 header-v2 plant-header-v1 plant-header-v4 plant-header-v3 plant-header-v5 {% if settings.headerv5_overlay %}header-top-overlay{% endif %}">
+  <div class="header-top">
+    <div class="container {% if settings.headerv5_layout == "normal" %}container-ver2{% endif %}">
+      <div class="box">
+        <p class="icon-menu-mobile"><i class="fa fa-bars" ></i></p>
+        <div class="box-right">
+          <div class="cart hover-menu">
+            <a href="/cart" class="icon-cart engo-icon-cart-text">
+              Cart <span>(<span id="CartCount">{{ cart.item_count }}</span>)</span>
+            </a>
+            {% comment %}
+            {% include "mini-cart" %}
+            {% endcomment %}
+          </div>
+          <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+            <i class="icon engo-icon-search"></i>
+          </div>
+        </div>
+        <div class="float-left hidden-xs hidden-sm">
+          <div class="burger-menu js-burger-menu">
+            <span></span>
+          </div>
+        </div>
+        <div class="logo engo-logo">
+          <a class="engoc-logo-normal" href="{{shop.url}}"><img src="{% if settings.headerv5_logo == blank %}{{'h2_logo1.png'|asset_url}}{% else %}{{settings.headerv5_logo|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv5_logo_maxwwidth}}" /></a>
+          <a class="engoc-logo-burger" href="{{shop.url}}"><img src="{% if settings.headerv5_logo_burger == blank %}{{'logo-white.png'|asset_url}}{% else %}{{settings.headerv5_logo_burger|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv5_logo_maxwwidth}}" /></a>
+        </div>
+        <div class="logo-mobile"><a href="{{shop.url}}"><img src="{% if settings.headerv5_logo_mobile == blank %}{{'h2_logo1.png'|asset_url}}{% else %}{{settings.headerv5_logo_mobile|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv5_logo_maxwwidth}}"  /></a></div>
+
+        {% include "menu" %}
+
+      </div>                
+    </div>
+    <!-- End container -->
+  </div>
+  <!-- End header-top -->
+</header>
+
+{% include 'header-slide-menu' %}

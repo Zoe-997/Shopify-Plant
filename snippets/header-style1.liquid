@@ -1,0 +1,30 @@
+<header id="header" class="header-v3 header-v2 plant-header-v1">
+  <div class="header-top">
+    <div class="container {% if settings.headerv1_layout == "normal" %}container-ver2{% endif %}">
+      <div class="box">
+        <p class="icon-menu-mobile"><i class="fa fa-bars" ></i></p>
+        <div class="box-right">
+          <div class="cart hover-menu">
+            <a href="/cart" class="icon-cart">
+              Cart <span>(<span id="CartCount">{{ cart.item_count }}</span>)</span>
+            </a>
+            {% comment %}
+            {% include "mini-cart" %}
+            {% endcomment %}
+          </div>
+          <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+            <i class="icon"></i>
+          </div>
+        </div>
+        <div class="logo">
+          <a href="{{shop.url}}"><img src="{% if settings.headerv1_logo == blank %}{{'h2_logo1.png'|asset_url}}{% else %}{{settings.headerv1_logo|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv1_logo_maxwwidth}}" /></a>
+        </div>
+        <div class="logo-mobile"><a href="{{shop.url}}"><img src="{% if settings.headerv1_logo_mobile == blank %}{{'h2_logo1.png'|asset_url}}{% else %}{{settings.headerv1_logo_mobile|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv1_logo_maxwwidth}}"  /></a></div>
+        
+        {% include "menu" %}
+      </div>                
+    </div>
+    <!-- End container -->
+  </div>
+  <!-- End header-top -->
+</header>

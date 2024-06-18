@@ -1,0 +1,182 @@
+{% comment %}
+
+  Comments will not appear right after they are submitted, either to be checked for spam
+  or to await moderation. When a comment is submitted, the browser is redirected to a page
+  that includes the new comment id in its URL.
+    Example: http://shopname.myshopify.com/blogs/news/2022072-my-post?comment=3721372
+
+  More information:
+    - http://docs.shopify.com/themes/liquid-variables/comment
+
+{% endcomment %}
+
+{% assign number_of_comments = article.comments_count %}
+
+{% comment %}
+  If a comment was just submitted and it has no blank fields, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+
+{% if article.image.src != blank %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <img src="{{ article.image.src | img_url: 'master' }}"> 
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="container container-ver2">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="breadcrumb-article-page engoc-breadcrumb-article"> 
+        <span><img src="{{'icon-breadcrumb-article.png'|asset_url}}"></span>
+        <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+        <i>/</i>
+        {{ blog.title | link_to: blog.url }}
+        <i>/</i>
+        <span>{{ article.title }}</span>
+      </p>
+    </div>
+    <div class="col-md-8">
+      <h1>{{article.title}}</h1>
+      
+      {% if section.settings.enable_info_date_author %}
+      <p class="plant-article-publish-info"><span>DATE</span><span class="plant-article-ex">:</span><a href="{{ article.url }}">{{ article.published_at | date: "%B %d, %Y" }}</a><span class="plant-article-in">BY</span><span class="plant-article-ex">:</span><a href="{{ article.url }}">{{article.author}}</a></p>
+	  {% endif %}
+      
+      
+      <div class="entry-content">
+        {% if section.settings.enable_social_share %}
+        {% include 'social-share-article' %}
+        {% endif %}
+        
+        <div class="plant-article-content">
+          {{article.content}}
+        </div>
+      </div>
+      
+      {% if section.settings.enable_disqus_comment %}
+      <div class="disqus-comment-code">
+        {{section.settings.disqus_comment_code}}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if section.settings.enable_newsletter %}
+<div class="section-newsletter about-section-newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter-wrapper newsletter-v2" style="background-color: {{section.settings.newsletter_bg_color}};">
+          <div class="container container-ver2">
+            <div class="row">
+              <div class="col-md-12">
+                {% if settings.newsletter_form_action != blank %}
+                {% assign form_action = settings.newsletter_form_action %}
+                {% else %}
+                {% assign form_action = '#' %}
+                {% endif %}
+
+                <form action="{{form_action}}" class="text-center" method="post">
+                  <label>
+                    <h3>{{section.settings.newletter_title}}</h3>
+                    <p>{{section.settings.newletter_des}}</p>
+                  </label>
+                  <div class="form-group">
+                    <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
+                  </div>
+                  <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Article page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_info_date_author",
+      "label": "Enable date & author?",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_social_share",
+      "label": "Enable social share?",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Disqus comment"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_disqus_comment",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "disqus_comment_code",
+      "label": "Disqus code",
+      "info": "[Get code](https://help.shopify.com/themes/customization/social-media/add-disqus)"
+    },
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme Settings tab > Mailchimp",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "color",
+ 	  "id": "newsletter_bg_color",
+      "label": "Background color",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "text",
+      "id": "newletter_title",
+      "label": "Title",
+      "default": "NEWSLETTER"
+    },
+    {
+      "type": "text",
+      "id": "newletter_des",
+      "label": "Description",
+      "default": "TO GET IN TOUCH"
+    },
+    {
+      "type": "text",
+      "id": "newletter_placeholder",
+      "label": "Input placeholder ",
+      "default": "Enter your e-mail"
+    },
+    {
+      "type": "text",
+      "id": "newletter_btn_name",
+      "label": "Button name",
+      "default": "SUBSCRIBE"
+    }
+  ]
+}
+{% endschema %}

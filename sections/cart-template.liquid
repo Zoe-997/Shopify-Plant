@@ -1,0 +1,134 @@
+<div class="main-content">
+  {%include 'breadcrumb-page'%}
+  
+  <div class="container container-ver2">
+    <div class="row">
+      <div class="col-md-8">
+        <h3>Shopping Cart</h3>
+        <div class="cart-box-container cart-box-cart-container">
+
+          {% if cart.item_count > 0 %}
+          <form action="/cart" method="post" novalidate>
+            <div class="box cart-container">
+              <table class="table cart-table space-30">
+
+                <tbody>
+                  {% for item in cart.items %}
+                  <tr class="item_cart">
+                    <td class="product-photo"><img  src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}"></td>
+                    <td class="produc-name">
+                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      {% unless item.variant.title contains 'Default' %}
+                      <div class="cart__meta-text">
+                        {% for option in item.product.options %}
+                        {{ option }}: {{ item.variant.options[forloop.index0] }}<br>
+                        {% endfor %}
+                      </div>
+                      {% endunless %}
+                      {% comment %}
+                      Optional, loop through custom product line items if available
+
+                      Line item properties come in as having two parts. The first part will be passed with the default form,
+                      but p.last is the actual custom property and may be blank. If it is, don't show it.
+
+                      For more info on line item properties, visit:
+                      - http://docs.shopify.com/support/your-store/products/how-do-I-collect-additional-information-on-the-product-page-Like-for-a-monogram-engraving-or-customization
+                      {% endcomment %}
+                      {%- assign property_size = item.properties | size -%}
+                      {% if property_size > 0 %}
+                      <div class="cart__meta-text">
+                        {% for p in item.properties %}
+                        {% unless p.last == blank %}
+                        {{ p.first }}:
+
+                        {% comment %}
+                        Check if there was an uploaded file associated
+                        {% endcomment %}
+                        {% if p.last contains '/uploads/' %}
+                        <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                        {% else %}
+                        {{ p.last }}
+                        {% endif %}
+                        {% endunless %}
+                        {% endfor %}
+                      </div>
+                      {% endif %}
+                      <input style="width:90px;" class="cart__qty-input" type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" pattern="[0-9]*">
+
+                    </td>
+                    <td class="produc-price">
+                      <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="remove"><img src="{{'icon-close-cart.png'|asset_url}}" alt="close"></a>                    
+                      <span class="amount">{{ item.price | money }}</span>	
+                      {% for discount in item.discounts %}
+                      <div class="cart-item__discount medium-up--hide">{{ discount.title }}</div>
+                      {% endfor %}
+
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <div class="btn-cart">
+                <div class="col-md-6 col-sm-6 col-xs-12 btnn btnn-left">
+                  <button type="button" onclick="window.location.href='/collections/all'">Continue Shopping</button>
+                </div>
+                <!--End align-left-->
+                <div class="col-md-6 col-sm-6 col-xs-12 btnn btnn-right">
+                  <button type="submit">Update Cart</button>
+                </div>
+                <!--End align-right-->
+              </div>
+
+            </div>
+          </form>
+
+          {% else %}
+          <div class="empty-page-content text-center">
+            <p>{{ 'cart.general.empty' | t }}</p>
+          </div>
+          {% endif %}
+
+          <!-- End cat-box-container -->
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="item">
+          <h3>Cart Totals</h3>
+          <div class="item-coupon item-total">
+            <div class ="subtotal">
+              <span>Cart Note</span>
+            </div>
+            <textarea type="text" placeholder="Special instructions for seller" style="width: 100%;"></textarea>
+            <div class ="total">
+              <span>Subtotal</span>
+              <span class="price">{{ cart.total_price | money }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="item item-button">
+          <button type="button" onclick="window.location.href='/checkout'" class="text-uppercase">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .banner-header-cart h3 {
+    display: none;
+  }
+</style>
+
+{% schema %}
+{
+"name": "Cart page",
+  "settings": [
+    {
+    "type": "checkbox",
+    "id": "cart_notes_enable",
+    "label": "Enable cart notes",
+    "default": false
+    }
+  ]
+}
+{% endschema %}
