@@ -1,0 +1,308 @@
+<div class="container">
+  <div class="banner-header banner-lbook3 space-30">
+    <img src="{% if section.settings.bg_image_breadcrumb == blank %}https://placehold.it/1860x339{% else %}{{section.settings.bg_image_breadcrumb|img_url:'master'}}{% endif %}" alt="Banner-header">
+    <div class="text">
+      <h3>
+        {{ page.title }}
+      </h3>
+      <p> <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+        <i class="fa fa-caret-right"></i>
+        {{ page.title }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="contactpage-info">
+  <div class="container container-ver2">
+    <div class="row">
+      <div class="col-md-5 col-sm-5 col-xs-12">
+        <img class="img-responsive" src="{% if section.settings.bg_image_left == blank %}https://placehold.it/390x600{% else %}{{section.settings.bg_image_left|img_url:'master'}}{% endif %}" alt="">
+      </div>
+      <div class="col-md-7 col-sm-7 col-xs-12">
+        {% for block in section.blocks %}
+        {% if block.type == "contact" %}
+        <div class="contact-block">
+          <div class="block-img"><img src="{% if block.settings.icon_img == blank %}https://placehold.it/30x20{% else %}{{block.settings.icon_img|img_url:'master'}}{% endif %}" alt=""></div>
+          <div class="block-content">
+            <h3>{{block.settings.ct_title}}</h3>
+            <ul>
+              <li>{{block.settings.ct_label1}}<span>{{block.settings.ct_content1}}</span></li>
+              <li>{{block.settings.ct_label2}}<span>{{block.settings.ct_content2}}</span></li>
+              <li>{{block.settings.ct_label3}}<span>{{block.settings.ct_content3}}</span></li>
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-form-map">
+  <div class="container container-ver2">
+    <div class="row">
+      <div class="col-md-push-6 col-sm-6">
+        <div id="engoj-google-map" class="engoc-google-map"></div>
+      </div>
+      <div class="col-md-pull-6 col-sm-6">
+        {% form 'contact' %}
+        {% if form.posted_successfully? %}
+        <p class="note form-success">
+          {{ 'contact.form.post_success' | t }}
+        </p>
+        {% endif %}
+        {{ form.errors | default_errors }}
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <label>{{section.settings.title_1}}</label>
+            <input type="text" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <label>{{section.settings.title_2}}</label>
+            <input type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <label>{{section.settings.title_3}}</label>
+            <input type="tel" name="contact[phone]"  value="">
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <label>{{section.settings.title_4}}</label>
+            <input type="text" name="contact[subject]" value="">
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <label>{{section.settings.title_5}}</label>
+            <textarea type="text" name="contact[body]" value=""></textarea>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <button type="submit">{{section.settings.title_6}}</button>
+          </div>
+        </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings.enable_newsletter %}
+<div class="section-newsletter about-section-newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter-wrapper newsletter-v2" style="background-color: {{section.settings.newsletter_bg_color}};">
+          <div class="container container-ver2">
+            <div class="row">
+              <div class="col-md-12">
+                {% if settings.newsletter_form_action != blank %}
+                {% assign form_action = settings.newsletter_form_action %}
+                {% else %}
+                {% assign form_action = '#' %}
+                {% endif %}
+
+                <form action="{{form_action}}" class="text-center">
+                  <label>
+                    <h3>{{section.settings.newletter_title}}</h3>
+                    <p>{{section.settings.newletter_des}}</p>
+                  </label>
+                  <div class="form-group">
+                    <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
+                  </div>
+                  <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Contact Us page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image_breadcrumb",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "info": "Add block contact below",
+      "content": "Contact Info"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_left",
+      "label": "Image Left"
+    },
+    {
+      "type": "header",
+      "content": "Contact Form"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Label 1",
+      "default": "First Name"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Label 2",
+      "default": "E-mail"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Label 3",
+      "default": "Phone Number"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "Label 4",
+      "default": "Subject"
+    },
+    {
+      "type": "text",
+      "id": "title_5",
+      "label": "Label 5",
+      "default": "Your Message"
+    },
+    {
+      "type": "text",
+      "id": "title_6",
+      "label": "Button name",
+      "default": "SEND MESSAGE"
+    },
+    {
+      "type": "header",
+      "info": "Setting in Login Store > Customize theme > Theme Settings tab > Google Maps",
+      "content": "Google Map"
+    },
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme Settings tab > Mailchimp",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "newsletter_bg_color",
+      "label": "Background color",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "text",
+      "id": "newletter_title",
+      "label": "Title",
+      "default": "NEWSLETTER"
+    },
+    {
+      "type": "text",
+      "id": "newletter_des",
+      "label": "Description",
+      "default": "TO GET IN TOUCH"
+    },
+    {
+      "type": "text",
+      "id": "newletter_placeholder",
+      "label": "Input placeholder ",
+      "default": "Enter your e-mail"
+    },
+    {
+      "type": "text",
+      "id": "newletter_btn_name",
+      "label": "Button name",
+      "default": "SUBSCRIBE"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact",
+      "name": "Contact",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_img",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "ct_title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "ct_label1",
+          "label": "Label 1",
+          "default": "Label 1"
+        },
+        {
+          "type": "text",
+          "id": "ct_content1",
+          "label": "Content 1",
+          "default": "Content 1"
+        },
+        {
+          "type": "text",
+          "id": "ct_label2",
+          "label": "Label 2",
+          "default": "Label 2"
+        },
+        {
+          "type": "text",
+          "id": "ct_content2",
+          "label": "Content 2",
+          "default": "Content 2"
+        },
+        {
+          "type": "text",
+          "id": "ct_label3",
+          "label": "Label 3",
+          "default": "Label 3"
+        },
+        {
+          "type": "text",
+          "id": "ct_content3",
+          "label": "Content 3",
+          "default": "Content 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Us page",
+      "blocks": [
+        {
+          "type": "contact"
+        },
+        {
+          "type": "contact"
+        },
+        {
+          "type": "contact"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

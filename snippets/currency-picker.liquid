@@ -1,0 +1,41 @@
+
+<div class="language">
+  {%if settings.language_enable%}
+  <span>Language:</span>
+  <div class="hover-menu">
+    <p>{{settings.language_default}}<i class="fa fa-angle-down"></i></p>
+    <div class="list-menu">
+      <ul>
+        {%for i in (1..6)%}
+    {%capture _enable%}language{{i}}_enable{%endcapture%}
+    {%capture _text%}language{{i}}_text{%endcapture%}
+    {%capture _url%}Language{{i}}_url{%endcapture%}
+    {%capture _img%}language{{i}}_image{%endcapture%}
+
+    {%assign enable = settings[_enable]%}
+    {%assign text = settings[_text]%}
+    {%assign url = settings[_url]%}
+    {%if enable%}
+    <li><a href="{{url}}" title="{{text}}">{{text}}</a></li>
+    {%endif%}
+    {% endfor %}
+
+      </ul>
+    </div>    
+  </div>
+  {%endif%}
+  {%if settings.currency_enable%}
+  <span>Price:</span>
+  <div class="hover-menu">
+    <p class="currency-current selected-currency">{{shop.currency}} <i class="fa fa-angle-down"></i></p>
+    <div class="list-menu">
+      <ul id="currencies">
+         {% assign supported = settings.supported_currencies | split: ' ' %}
+          {% for c in supported %}
+          <li><a data-currency="{{c}}">{{c}}</a></li>
+          {% endfor %}
+      </ul>
+    </div>    
+  </div>
+  {%endif%}
+</div>
