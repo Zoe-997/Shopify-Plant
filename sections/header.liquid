@@ -1,0 +1,90 @@
+{% if template == 'index' %}
+  {% unless settings.headerv6_enable %}
+  {%if section.settings.header_in_homepage =='header_style1'%}
+  {% include 'header-style1' %}
+  {%elsif section.settings.header_in_homepage =='header_style2'%}
+  {% include 'header-style2' %}
+  {%elsif section.settings.header_in_homepage =='header_style3'%}
+  {% include 'header-style3' %}
+  {%elsif section.settings.header_in_homepage =='header_style4'%}
+  {% include 'header-style4' %}
+  {% else %}
+  {% include 'header-style5' %}
+  {%endif%}
+  {% endunless %}
+{%else%}
+
+  {%if section.settings.header_in_orther_page =='header_style1'%}
+  {% include 'header-style1' %}
+  {%elsif section.settings.header_in_orther_page =='header_style2'%}
+  {% include 'header-style2' %}
+  {%elsif section.settings.header_in_orther_page =='header_style3'%}
+  {% include 'header-style3' %}
+  {%elsif section.settings.header_in_orther_page =='header_style4'%}
+  {% include 'header-style4' %}
+  {% else %}
+  {% include 'header-style5' %}
+  {%endif%}
+
+{%endif%}
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "select",
+        "id": "header_in_homepage",
+        "label": "Header in homepage",
+        "options": [
+          {
+            "value": "header_style1",
+            "label": "Header v1"
+          },
+          {
+            "value": "header_style2",
+            "label": "Header v2"
+          },
+          {
+            "value": "header_style3",
+            "label": "Header v3"
+          },
+          {
+            "value": "header_style4",
+            "label": "Header v4"
+          },
+          {
+            "value": "header_style5",
+            "label": "Header v5"
+          }
+        ]
+      },
+		{
+        "type": "select",
+        "id": "header_in_orther_page",
+        "label": "Header in orther page",
+        "options": [
+          {
+            "value": "header_style1",
+            "label": "Header v1"
+          },
+          {
+            "value": "header_style2",
+            "label": "Header v2"
+          },
+          {
+            "value": "header_style3",
+            "label": "Header v3"
+          },
+          {
+            "value": "header_style4",
+            "label": "Header v4"
+          },
+          {
+            "value": "header_style5",
+            "label": "Header v5"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

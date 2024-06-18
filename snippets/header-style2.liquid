@@ -1,0 +1,67 @@
+
+<header id="header" class="header-v1 header-v3">
+  <div id="topbar">
+    <div class="container {% if settings.headerv1_layout == "normal" %}container-ver2{% endif %}">
+      <div class="inner-topbar box">
+        <div class="float-left hidden-xs" >
+<!-- 
+          <div class="hover-menu">
+            <a class="acc" href="#" ><img src="{{'icon-user-header.png'|asset_url}}" alt="icon">{{settings.h1_title_account}}</a>
+            <ul class="list-menu">
+              {% if customer %}
+              <li><a href="/account">{{ customer.name }}</a></li>
+              <li><a href="/account/logout">{{ 'layout.customer.log_out' | t}}</a></li>
+              <li><a href="/pages/wish-list">{{ 'layout.customer.wishlist' | t}}</a></li>
+
+              {% else %}
+              <li><a href="/account/login">{{ 'layout.customer.log_in' | t }}</a></li>
+              <li><a href="/account/register">{{ 'layout.customer.create_account' | t}}</a></li>
+              {%endif%}
+            </ul>
+          </div> -->
+          <p class="phone">
+            <img src="{{'icon-phone-plant.png'|asset_url}}" alt="">
+            
+            <a>
+              <span class="phone-title">{{settings.h1_phone_title}}</span>
+              <span>{{settings.h1_phone}}</span>
+            </a>
+          </p>
+        </div>
+        <div class="logo">
+
+          <a href="{{shop.url}}"><img src="{% if settings.headerv2_logo == blank %}{{'h1_logo1.png'|asset_url}}{% else %}{{settings.headerv2_logo|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv2_logo_maxwwidth}}" /></a>
+
+        </div>
+        <div class="float-right align-right">
+          <div class="box-right">
+            <div class="cart hover-menu">
+              <a href="/cart" class="icon-cart">
+                Cart <span>(<span id="CartCount">{{ cart.item_count }}</span>)</span>
+              </a>
+              {% comment %}
+              {% include "mini-cart" %}
+              {% endcomment %}
+            </div>
+            <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+              <i class="icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End container -->
+  </div>
+  <!-- End topbar -->
+  <div class="header-top">
+    <div class="container container-ver2">
+      <div class="box">
+        <p class="icon-menu-mobile"><i class="fa fa-bars" ></i></p>
+        <div class="logo-mobile"><a href="{{shop.url}}"><img src="{% if settings.headerv2_logo_mobile == blank %}{{'h1_logo1.png'|asset_url}}{% else %}{{settings.headerv2_logo_mobile|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv2_logo_maxwwidth}}" /></a></div>
+        {% include "menu" %}
+      </div>                
+    </div>
+    <!-- End container -->
+  </div>
+  <!-- End header-top -->
+</header><!-- /header -->

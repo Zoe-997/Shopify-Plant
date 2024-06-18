@@ -1,0 +1,46 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}
+
+{% capture price %}{{ product.price | money }}{% endcapture %}
+
+<div class="col-md-4 col-sm-6 col-xs-12 engoc-products">
+  <div class="item-inner">
+    <div class="product">
+      <div class="product-images">
+        <a href="{{ product.url | within: collection }}" title="{{product.title}}">
+          <img class="primary_image" src="{{ product.featured_image.src | img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+      </div>
+      <div class="action">
+        {% if product.variants.size > 1 %}
+        <a class="add-cart" href="{{ product.url | within: collection }}" title="{{settings.product_select_option_name }}">
+        </a>
+        {% else %}
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+          <button type="submit" name="add" id="AddToCart{{ product.id }}" class="add-cart add-to-cart-button enj-add-to-cart-btn" title="{{ settings.product_cart_name }}">
+          </button>
+        </form>
+        {% endif %}
+        {%include 'add-wishlist'%}
+        <a href="javascript:void(0)" data-id="{{ product.handle }}" class="zoom quick-view engoj-btn-quickview" title="{{ settings.product_quickview_name }}"></a>
+      </div>
+      <div class="info-product">
+        <a href="{{ product.url | within: collection }}" title="{{product.title}}"><p class="product-title">{{product.title}}</p></a>   
+
+        {% if on_sale %}
+        <p class="product-price-old">{{ product.compare_at_price | money }}</p>
+        {% endif %}
+        <p class="product-price" {% if on_sale %}style="padding-left: 5px;"{% else %}{% endif %}>{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}</p>
+        {% if product.metafields.engo_des.p_info != blank %}<div class="lable-product"><span class="arrow-lable"></span><span class="lablee">{{product.metafields.engo_des.p_info}}</span></div>{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
