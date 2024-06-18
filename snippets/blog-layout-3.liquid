@@ -1,0 +1,32 @@
+{% paginate blog.articles by 8 %}
+<div class="container container-ver2">
+  <div class="row">
+    {% for article in blog.articles %}
+    <div class="col-md-12">
+      <div class="blog-post-wrapper">
+        <div class="row">
+          <div class="col-sm-9">
+            <p class="info">BY {{article.author}} / {{article.comments_count}} COMMENTS</p>
+            <p class="blog-post-name"><a href="{{ article.url}}">{{ article.title}}</a></p>
+          </div>
+          <div class="col-sm-3">
+            <p class="publish-date">
+              <span class="day">{{ article.published_at | date: "%d" }}</span>
+              <span class="line"></span>
+              <span class="month">{{ article.published_at | date: "%b" }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    
+    <div class="col-md-12">
+      {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+      {% endif %}
+    </div>
+    
+  </div>
+</div>
+{% endpaginate %}

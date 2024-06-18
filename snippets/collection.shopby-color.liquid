@@ -1,0 +1,32 @@
+ 
+
+{% if settings.enable_shop_by_tags_1 %}
+
+<div class="widget widget-filter-size widget-container filter-block filter-custom filter-tag">
+  {% assign tags = settings.shop_by_tags_1_list_tags | split: ',' %}
+  <h2 class="widget-title title14">{{ settings.shop_by_tags_1_title }}</h2>
+  <div class="widget-content">
+    <ul class="list-filter size-filter">
+      {% for i in (1..10) %}
+       {% capture shop_by_color_text %}shop_by_color_text_{{ i }}{% endcapture %}
+      {% if settings[shop_by_color_text] != blank %}
+      {% assign tag = settings[shop_by_color_text] | strip %}
+      <li class="li-price {% if current_tags contains tag %}  active{% endif %}">
+        {% assign tag_value = tag | handleize %}
+        <input type="checkbox" value="{{ tag_value }}" {% if current_tags contains tag %}checked{% endif %}/>
+         <a href="javascript:void(0)"  class="{% if current_tags contains tag %}active{% endif %}">{{tag}}</a>
+      </li>
+      
+
+      {% endif %}
+      {% endfor %}
+
+      
+    </ul>
+  </div>
+</div>
+
+
+{% endif %}
+
+

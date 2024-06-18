@@ -1,0 +1,168 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-contact" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="container contact-v1">
+    <div class="container container-ver2 ">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12 contact-left">
+          <h3>{{section.settings.ci_title}}</h3>
+          <p>{{section.settings.ci_des}}</p>
+          <ul class="contact">
+            <li><strong>{{section.settings.ci_phone_title}}</strong>{{section.settings.ci_phone_content}}</li>
+            <li><strong>{{section.settings.ci_email_title}}</strong>{{section.settings.ci_email_content}}</li>
+            <li><strong>{{section.settings.ci_address_title}}</strong>{{section.settings.ci_address_content}}</li>
+          </ul>
+          <ul class="social" data-theme-editor-setting="fv1_social">
+            {{section.settings.ci_social}}
+          </ul>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 form-contact">
+          <div class="text"><span>{{section.settings.cf_title}}</span></div>
+          {% form 'contact' %}
+          {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+          {% endif %}
+          {{ form.errors | default_errors }}
+          <div>
+            <input name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}" class="form-control" type="text" placeholder="{{section.settings.cf_placeholder_name}}">
+            <input name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="form-control {% if form.errors contains 'email' %}mail--error{% endif %}" type="email" placeholder="{{section.settings.cf_placeholder_email}}">
+            <textarea name="contact[body]" placeholder="{{section.settings.cf_placeholder_message}}"></textarea>
+            <button type="submit">{{section.settings.cf_placeholder_btname}}</button>
+          </div>
+          {% endform %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Contact",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contact Info"
+    },
+    {
+      "type": "text",
+      "id": "ci_title",
+      "label": "Title",
+      "default": "Get in touch."
+    },
+    {
+      "type": "text",
+      "id": "ci_des",
+      "label": "Description",
+      "default": "Alienum phaedrum torquatos nec eu, vis detraxit serpents periculiser ex, nihil expetendis in mei. Meis an pericula eres euripidis, hinces partem ei est. Eos ei nisl graecis."
+    },
+    {
+      "type": "text",
+      "id": "ci_phone_title",
+      "label": "- Phone title",
+      "default": "ph:"
+    },
+    {
+      "type": "text",
+      "id": "ci_phone_content",
+      "label": "Phone content",
+      "default": "+387 64 8459 254 68  "
+    },
+    {
+      "type": "text",
+      "id": "ci_email_title",
+      "label": "- Email title",
+      "default": "e:"
+    },
+    {
+      "type": "text",
+      "id": "ci_email_content",
+      "label": "Email content",
+      "default": "shopilaunch@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "ci_address_title",
+      "label": "- Address title",
+      "default": "ad:"
+    },
+    {
+      "type": "text",
+      "id": "ci_address_content",
+      "label": "Address content",
+      "default": "121 King Street, Melbourne Victoria 3000 Australia"
+    },
+    {
+      "type": "textarea",
+      "id": "ci_social",
+      "label": "Social content",
+      "info": "input HTML"
+    },
+    {
+      "type": "header",
+      "content": "Contact Form"
+    },
+    {
+      "type": "text",
+      "id": "cf_title",
+      "label": "Title",
+      "default": "We'll get back to you shortly..."
+    },
+    {
+      "type": "text",
+      "id": "cf_placeholder_name",
+      "label": "Placeholder name",
+      "default": "Name: "
+    },
+    {
+      "type": "text",
+      "id": "cf_placeholder_email",
+      "label": "Placeholder email",
+      "default": "Email: "
+    },
+    {
+      "type": "text",
+      "id": "cf_placeholder_message",
+      "label": "Placeholder message",
+      "default": "Message: "
+    },
+    {
+      "type": "text",
+      "id": "cf_placeholder_btname",
+      "label": "Placeholder button name",
+      "default": "SUBMIT"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,26 @@
+
+{% for i in (1..6) %}
+<div class="item-product">
+  <div class="item-inner">
+    <div class="product">
+      <div class="product-images">
+        <a href="/admin/products" title="Product ShopiLaunch">
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        </a>
+      </div>
+      <div class="action">
+        <a class="add-cart" href="/admin/products" title="Add to Cart"></a>
+        <a href="/admin/products" class="wish" title="Add to Wishlist"></a>
+        <a href="/admin/products" class="zoom quick-view" title="Quick view"></a>
+      </div>
+      <div class="info-product">
+        <a href="/admin/products" title="Product ShopiLaunch"><p class="product-title">Example Product</p></a>            
+        <p class="product-price-old">$700.00</p>
+        <p class="product-price">$210.00</p>
+        <div class="lable-product"><span class="arrow-lable"></span><span class="lablee">133cm</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

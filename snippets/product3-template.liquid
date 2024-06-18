@@ -1,0 +1,309 @@
+<div class="main-content" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+  
+  <div class="container">
+    <div class="banner-header-cart" style="padding-left: 0px;">
+      <div class="text">
+        <p> <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+          {% if template contains 'product' %}
+          {% if collection %}
+          <i class="fa fa-caret-right"></i>
+          {% if collection.handle %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+          {{ collection.title | link_to: url }}
+          {% endif %}
+          {% endif %}
+          <i class="fa fa-caret-right"></i>
+          {{ product.title }}
+          {% elsif template contains 'collection' and collection.handle %}
+
+          <i class="fa fa-caret-right"></i>
+          {% if current_tags %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+          {{ collection.title | link_to: url }}
+          <i class="fa fa-caret-right"></i>
+          {{ current_tags | join: " + " }}
+          {% else %}
+          {{ collection.title }}
+          {% endif %}
+          {% endif %}
+
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">     
+    <div class="product-details-content">
+
+      <div class="col-md-12 col-sm-12" style="text-align: center;padding-top: 50px; padding-bottom: 30px;">
+        <div class="product-top">
+          <div class="slider slider-single">
+          {% for image in product.images %}
+          <a href="javascript:void(0)" class="zoom">
+            <img class="engoj_img_main" src="{{ image.src | img_url: 'master' }}" alt="images">
+          </a>
+          {% endfor %}		
+        </div>
+
+
+        <!-- End slider-for -->
+        <div class="slider slider-nav">
+          {% for image in product.images %}
+          <a href="javascript:void(0)" class="engoj-nav-item">
+            <img src="{{ image.src | img_url: 'master' }}" alt="images">
+          </a>
+          {% endfor %}	
+
+        </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12" style="text-align: center;">
+        <div class="box-details-info box-details-info-bottom"  itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+          <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+          <div class="rating">
+            <div class="overflow-h">
+              <div class="icon-rating">  
+                <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+              </div>
+            </div>
+          </div>
+          <div class="product-name">
+            <h1 itemprop="name">{{product.title}}</h1>
+          </div>
+          <!-- End product-name -->
+
+          <!-- End Rating -->
+          <div class="wrap-price">
+            {% if product.compare_at_price > product.price %}
+            <p class="price-old">{{ product.compare_at_price | money }}</p>
+            {% endif %}
+            <p class="price" id="ProductPrice" itemprop="price">{{ product.price | money }}</p>
+
+          </div>
+          <!-- End Price -->
+        </div>
+
+        <!-- End box details info -->
+        {% form 'product', product, id: "AddToCartForm" %}
+          <div class="options option-bottom">
+
+            <!--End Description-->
+            <div class="box space-30 box-bottom">
+
+              <select name="id" id="productSelect" class="engoj-except-select2 product-single__variants">
+                {% for variant in product.variants %}
+                {% if variant.available %}
+                {% assign sku = variant.sku %}
+                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                {% else %}
+                <option disabled="disabled">
+                  {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                </option>
+                {% endif %}
+                {% endfor %}
+              </select>
+
+              <!-- End col-md-6 -->
+              <div class="selector-wrapper qtys">
+
+<!--                 <div class="title">
+                  <h3>{{'products.product.quantity'|t}}</h3>
+                </div> -->
+                <input type="number" size="4" class="input-text qty text quantity-selector" title="Qty" value="1" min="1" id="Quantity" name="quantity" />
+                <a href="" class="wish" title="Add to Wishlist"></a>
+              </div>
+              <!-- End col-md-5 -->
+              <!-- End row -->
+            </div>
+            <!-- End row -->
+            <div class="action">
+              <button class="link-v1 add-cart bg-brand btn-addtocart-b enj-add-to-cart-btn btn-cart" type="submit" name="add" id="AddToCart"><span>{{'products.product.add_to_cart'|t}}</span></button>
+
+            </div>
+            
+            {% if section.settings.enable_dynamic_checkout %}
+            {{ form | payment_button }}
+            {% endif %}
+          </div>
+        {% endform %}
+        <!-- End Options -->
+
+        
+      </div>
+    </div>
+    <div class="hoz-tab-container hoz-tab-container-bottom space-padding-tb-30">
+
+      <ul class="tabs">
+
+        {%if section.settings.show_des_tab%}
+        <li class="item" rel="description">
+          {{ 'product_detail.description' |t}}
+        </li>
+        {% endif%}
+
+        {%if section.settings.show_custom_tab %}
+        <li class="item" rel="product-tags">
+          {{section.settings.custom_tab_title}}
+        </li>
+        {% endif%}
+        {%if section.settings.show_review_tab %}
+        <li  class="item" rel="customer">
+          {{ 'product_detail.review' |t}} 
+        </li>
+        {% endif%}
+      </ul>
+      <div class="tab-container">
+
+        {%if section.settings.show_des_tab %}
+        <div id="description" class="tab-content">
+          <div class="text">
+            {{product.description}}
+          </div>
+        </div>
+        {%endif%}
+        {%if section.settings.show_custom_tab %}
+        <div id="product-tags" class="tab-content">
+          {{section.settings.custom_tab_content}}
+        </div>
+        {%endif%}
+        {%if section.settings.show_review_tab %}
+        <div id="customer" class="tab-content" itemtype="http://schema.org/Review" itemscope="">
+          <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+        </div>
+        {%endif%}
+      </div>
+    </div>
+    <!-- tab-container -->
+    {%if section.settings.show_upsell_product %}
+    <div class="title-text-v2 space-60 engoc-title-uppsell">
+      <h3 class="engoc-uppsell">{{section.settings.upsell_product_title}}</h3>
+    </div>   
+    <!-- End title -->
+    <div class="upsell-product products furniture hover-shadow ver2">
+      {%for product in collections[section.settings.upsel_collection].products limit: section.settings.product_limit %}
+      <div class="item-inner">
+        {%include 'product-item'%}
+
+        <!-- End product -->
+      </div>
+      {%else%}
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      {%endfor%}
+    </div>
+    {%endif%}
+  </div>
+  <!-- End container --> 
+</div>
