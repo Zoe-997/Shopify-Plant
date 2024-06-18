@@ -1,0 +1,111 @@
+
+<div class="wrap-sidebar">
+  <aside class="widget widget_search">
+    <div class="search-form">
+      <form  action="/search" method="get">
+        <input type="text" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}" class="ajax_autosuggest_input ac_input" name="q">
+        <button type="submit" class="icon-search">
+          <i class="icons icon-magnifier"></i>
+        </button>
+      </form>
+    </div>
+  </aside>
+  {%if settings.sidebar_enable_category %}
+  <aside class="widget blog-categories">
+    <h3 class="widget-title">{{settings.sidebar_category}}</h3>
+    <ul>
+      {% for link in linklists[settings.sidebar_category_menu].links %}
+      <li><a href="{{link.url}}">{{link.title}}</a></li>
+      {%endfor%}
+    </ul>
+  </aside>
+  {%endif%}
+  {%if settings.sidebar_enable_recent_post%}
+  <aside class="widget recent-post">
+    <h3 class="widget-title">{{settings.sidebar_recent_post}}</h3>
+    <ul>
+      {% for article in blogs[settings.sidebar_blog].articles limit: settings.sidebar_blog_limit %}
+      <li><a href="{{article.url}}" title="{{article.title}}">{{article.title}}</a></li>
+      {%endfor%}
+
+    </ul>
+  </aside>
+  {%endif%}
+  
+  {%if settings.sidebar_enable_collection%}
+  <aside class="widget widget_feature blog">
+    <h3 class="widget-title">{{settings.sidebar_collection}}</h3>
+    <ul class="box space-40">
+      {%for product in collections[settings.sidebar_select_collection].products limit:settings.sidebar_collection_limit%}
+      {% assign on_sale = false %}
+      {% assign sale_text = 'products.product.sale' | t %}
+      {% if product.compare_at_price > product.price %}
+      {% assign on_sale = true %}
+      {% endif %}
+
+      {% assign sold_out = true %}
+      {% assign sold_out_text = 'products.product.sold_out' | t %}
+      {% if product.available %}
+      {% assign sold_out = false %}
+      {% endif %} 
+      <li>
+        <a class="images" href="{{product.url}}" title="images">
+          <img class="img-responsive" src="{{ product.featured_image.src | img_url: 'medium' }}" alt="images">
+        </a>
+        <div class="text">
+          <h2>
+            <a href="{{product.url| within: collection }}}}" title="{{product.title}}">{{product.title}}</a>
+          </h2>
+          {% capture price %}{{ product.price | money }}{% endcapture %}
+          <p>  {% if on_sale %}<span class="price-old">{{ product.compare_at_price | money }}</span>{% endif %}
+            {% if product.price_varies %}
+            <span>{{ 'products.general.from_text_html' | t: price: price }}</span>
+            {% else %}
+
+            <span>{{ price }}</span>
+            {% endif %}
+          </p>
+        </div>
+      </li>
+      {%endfor%}
+
+    </ul>
+  </aside>
+  {%endif%}  
+  
+
+ {%if settings.sidebar_enable_tags %}
+  <aside class="widget tags-cloud">
+    <h3 class="widget-title">{{settings.sidebar_tags}}</h3>
+    <div class="content">
+      {% for tag in blog.all_tags %}
+     
+      {{ tag | link_to_tag: tag }}
+
+      {% endfor %}
+
+
+    </div>
+  </aside>
+
+  {%endif%}
+ 
+  {%if settings.sidebar_banner %}
+  <aside class="widget flick-photo">
+    <h3 class="widget-title">{{settings.sidebar_banner}}</h3>
+    <ul>
+      {%for i in (1..9)%}
+      {%capture enable %}sidebar_enable_banner_image{{i}}{%endcapture%}
+      {%capture image %}sidebar_banner_image{{i}}.jpg{%endcapture%}
+      {%capture url %}sidebar_banner_url{{i}}{%endcapture%}
+      {%if settings[enable] %}
+      <li class="hover-images">
+        <a href="{{settings[url]}}"><img src="{{image|asset_url}}" alt="" /></a>
+      </li>
+      {%endif%}
+      {%endfor%}
+
+    </ul>
+  </aside>
+   {%endif%}
+</div>

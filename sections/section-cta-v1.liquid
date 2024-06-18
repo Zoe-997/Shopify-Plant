@@ -1,0 +1,146 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-cta-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  {% for block in section.blocks %}
+  <div class="cta-v1" style="background-color: {{block.settings.banner_bgcolor}}">
+    <div class="container container-ver2 ">
+      <div class="row">
+        <div class="col-md-12 item-cta">
+          <div class="row">
+            {% if block.settings.banner_layout == "left" %}
+            <div class="col-md-5 img-cta">
+              <img class="img-responsive" src="{% if block.settings.banner_img == blank %}https://placehold.it/804x615{% else %}{{block.settings.banner_img|img_url:'master'}}{% endif %}" alt="">
+            </div>
+            {% endif %}
+            <div class="{% if block.settings.banner_layout == "left" %}col-md-7{% else %}col-md-5{% endif %} info-cta">
+              {% if block.settings.banner_content == "titlefirst" %}
+              <span class="span-fi">{{block.settings.banner_title}}</span>
+              <p class="p-sc">{{block.settings.banner_des}}</p>
+              {% elsif block.settings.banner_content == "desfirst" %}
+              <p>{{block.settings.banner_des}}</p>
+              <span>{{block.settings.banner_title}}</span>
+              {% endif %}
+              <a class="link-v1 bg-brand" href="{{block.settings.banner_url}}">{{block.settings.banner_btn_name}}</a>
+            </div>
+            {% if block.settings.banner_layout == "right" %}
+            <div class="col-md-7 img-cta">
+              <img class="img-responsive" src="{% if block.settings.banner_img == blank %}https://placehold.it/804x615{% else %}{{block.settings.banner_img|img_url:'master'}}{% endif %}" alt="">
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Call To Action v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "banner_img",
+          "label": "Banner Image"
+        },
+        {
+           "type": "select",
+           "id": "banner_layout",
+           "options": [
+              { "value": "left", "label": "Left"},
+              { "value": "right", "label": "Right"}
+           ],
+           "label": "Banner Layout"
+        },
+        {
+           "type": "select",
+           "id": "banner_content",
+           "options": [
+              { "value": "titlefirst", "label": "Title First"},
+              { "value": "desfirst", "label": "Description First"}
+           ],
+           "label": "Banner Content"
+        },
+        {
+          "type": "color",
+          "id": "banner_bgcolor",
+          "label": "Background Color",
+          "default": "#ededed"
+        },
+        {
+          "type": "text",
+          "id": "banner_title",
+          "label": "Banner Title",
+          "default": "PLANTS FOR HEALTHY"
+        },
+        {
+          "type": "text",
+          "id": "banner_des",
+          "label": "Banner Description",
+          "default": "Composters For Healthy Planet"
+        },
+        {
+          "type": "text",
+          "id": "banner_btn_name",
+          "label": "Banner Button Name",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "banner_url",
+          "label": "Banner URL",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Call To Action v1",
+      "category": "Banner",
+      "blocks": [
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

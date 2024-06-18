@@ -1,0 +1,128 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="section-collection-tab-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <section class="collection-tab-v1">
+    <div class="container">
+      <div class="title-text-v2">
+        <h3>{{section.settings.collection_title}}</h3>
+      </div>
+      <div class="featured-products home_2 new-arrivals lastest">
+        <ul class="tabs tabs-title">
+          {%for block in section.blocks %}
+          <li {%if forloop.index == 1%}class="item active"{%else%}class="item"{%endif%} rel="{{collections[block.settings.product_collection].handle}}{{ section.id }}" style="margin-bottom: 5px;">{{block.settings.product_collection_title}}</li>
+          {%endfor%}
+
+        </ul>
+        <div class="tab-container space-10">
+          {%for block in section.blocks %}
+          <div id="{{collections[block.settings.product_collection].handle}}{{ section.id }}" class="tab-content {%if forloop.index == 1%}active{%endif%}">
+
+
+            <div class="products hover-shadow ver2">
+
+              {%for product in collections[block.settings.product_collection].products limit:block.settings.product_limit%}
+
+              {%include 'product-item'%}
+              {%else%}
+              {%include 'product-item-empty'%}
+              {%endfor%}
+
+            </div>
+            <!-- End product-tab-content products -->
+            <div class="box center space-padding-tb-30 space-30">
+              <a class="link-v1 bg-brand" href="{{collections[block.settings.product_collection].url}}" title="{{section.settings.collection_viewall}}">{{section.settings.collection_viewall}}</a>
+            </div>
+          </div>
+          <!-- End tab-content -->
+          {%endfor%}
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Tab v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "collection_title",
+      "label": "Title",
+      "default": "Lastest Products"
+    },
+    {
+      "type": "text",
+      "id": "collection_viewall",
+      "label": "Text view all",
+      "default": "View all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "product_collection_title",
+          "label": "Title",
+          "default": "product"
+        },
+        {
+          "type": "collection",
+          "id": "product_collection",
+          "label": "Select collection"
+        },
+        {
+          "type": "text",
+          "id": "product_limit",
+          "label": "Product limit",
+          "default": "8"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Tab v1",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        },
+        {
+          "type": "Collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

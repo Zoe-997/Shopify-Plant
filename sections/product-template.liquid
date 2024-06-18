@@ -1,0 +1,661 @@
+<!-- /templates/product.liquid -->
+{% comment %}
+
+Rich snippets (itemscope, itemtype, etc.) for products are a theme requirement,
+and allow search engines to easily understand what the content is.
+
+For more information on these Scheme.org tags, visit:
+- http://schema.org/docs/gs.html
+
+{% endcomment %}
+
+{% if section.settings.product_style == "v1" %}
+<div class="main-content" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+  
+  <div class="container">
+    <div class="banner-header-cart" style="padding-left: 0px;">
+      <div class="text">
+        <p> <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+          {% if template contains 'product' %}
+          {% if collection %}
+          <i class="fa fa-caret-right"></i>
+          {% if collection.handle %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+          {{ collection.title | link_to: url }}
+          {% endif %}
+          {% endif %}
+          <i class="fa fa-caret-right"></i>
+          {{ product.title }}
+          {% elsif template contains 'collection' and collection.handle %}
+
+          <i class="fa fa-caret-right"></i>
+          {% if current_tags %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+          {{ collection.title | link_to: url }}
+          <i class="fa fa-caret-right"></i>
+          {{ current_tags | join: " + " }}
+          {% else %}
+          {{ collection.title }}
+          {% endif %}
+          {% endif %}
+
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">     
+    <div class="product-details-content">
+      <div class="col-md-6 col-sm-6">
+        <div class="slider slider-single">
+          {% for image in product.images %}
+          <a href="javascript:void(0)" class="zoom">
+            <img class="engoj_img_main" src="{{ image.src | img_url: 'master' }}" alt="images">
+          </a>
+          {% endfor %}		
+        </div>
+
+
+        <!-- End slider-for -->
+        <div class="slider slider-nav">
+          {% for image in product.images %}
+          <a href="javascript:void(0)" class="engoj-nav-item">
+            <img src="{{ image.src | img_url: 'master' }}" alt="images">
+          </a>
+          {% endfor %}	
+
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="box-details-info"  itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+          <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+          <div class="product-name">
+            <h1 itemprop="name">{{product.title}}</h1>
+          </div>
+          <!-- End product-name -->
+          <div class="rating">
+            <div class="overflow-h">
+              <div class="icon-rating">  
+                <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+              </div>
+            </div>
+          </div>
+          <!-- End Rating -->
+          <div class="wrap-price">
+            {% if product.compare_at_price > product.price %}
+            <p class="price-old">{{ product.compare_at_price | money }}</p>
+            {% endif %}
+            <p class="price" id="ProductPrice" itemprop="price">{{ product.price | money }}</p>
+
+          </div>
+          <!-- End Price -->
+        </div>
+
+        <!-- End box details info -->
+          {% form 'product', product, id: "AddToCartForm" %}
+          <div class="options">
+
+            <!--End Description-->
+            <div class="box space-30">
+
+              <select name="id" id="productSelect" class="engoj-except-select2 product-single__variants">
+                {% for variant in product.variants %}
+                {% if variant.available %}
+                {% assign sku = variant.sku %}
+                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                {% else %}
+                <option disabled="disabled">
+                  {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                </option>
+                {% endif %}
+                {% endfor %}
+              </select>
+
+              <!-- End col-md-6 -->
+              <div class="selector-wrapper-quantity qtys">
+
+                <div class="title">
+                  <h3>{{'products.product.quantity'|t}}</h3>
+                </div>
+                <input type="number" size="4" class="input-text qty text quantity-selector" title="Qty" value="1" min="1" id="Quantity" name="quantity" />
+              </div>
+              <!-- End col-md-5 -->
+              <!-- End row -->
+            </div>
+            <!-- End row -->
+            <div class="action">
+              <button class="link-v1 add-cart bg-brand btn-addtocart-b enj-add-to-cart-btn btn-cart" type="submit" name="add" id="AddToCart"><span>{{'products.product.add_to_cart'|t}}</span></button>
+            	<a href="" class="wish" title="Add to Wishlist"></a>
+            </div>
+            {% if section.settings.enable_dynamic_checkout %}
+            {{ form | payment_button }}
+            {% endif %}
+          </div>
+        {% endform %}
+        <!-- End Options -->
+
+        <div class="accordion box space-100">
+          <!-- Accordion v2 -->
+          <div class="accordion accordion-v2">
+            <div class="panel-group" id="accordion-v2">
+              {%if section.settings.show_des_tab%}
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapse-v2-One" aria-expanded="true" class="">
+                      {{ 'product_detail.description' |t}}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-v2-One" class="panel-collapse active collapse in">
+                  <div class="panel-body">
+                    {{product.description}} 
+                  </div>
+                </div>
+              </div>
+              {%endif%}
+              {%if section.settings.show_custom_tab %}
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-v2" href="#collapse-v2-Two" aria-expanded="false">
+                      {{section.settings.custom_tab_title}}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-v2-Two" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    {{section.settings.custom_tab_content}}
+                  </div>
+                </div>
+              </div>
+              {% endif%}
+              {%if section.settings.show_review_tab %}
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-v2" href="#collapse-v2-Three" aria-expanded="false">
+                      {{ 'product_detail.review' |t}} 
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-v2-Three" class="panel-collapse collapse" itemtype="http://schema.org/Review" itemscope="">
+                  <div id="customer">
+                    <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+                  </div>
+                </div>
+              </div>
+              {%endif%}
+            </div>
+          </div>    
+          <!-- End Accordion v2 -->
+          <div class="social box">
+            <h3>{{'products.product.share_this'|t}}</h3>
+            {%include 'social-share'%}
+          </div>
+          <!-- End share -->
+        </div>
+        <!-- End col-md-6 -->
+      </div>
+    </div>   
+    <!-- End product-details-content -->
+
+    <!-- tab-container -->
+    {%if section.settings.show_upsell_product %}
+    <div class="title-text-v2 space-60 engoc-title-uppsell">
+      <h3 class="engoc-uppsell">{{section.settings.upsell_product_title}}</h3>
+    </div>   
+    <!-- End title -->
+    <div class="upsell-product products furniture hover-shadow ver2">
+      {%for product in collections[section.settings.upsel_collection].products limit: section.settings.product_limit %}
+      <div class="item-inner">
+        {%include 'product-item'%}
+
+        <!-- End product -->
+      </div>
+      {%else%}
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      <div class="item-inner">
+        <div class="product">
+          <div class="product-images">
+            <a href="/admin/products/new" title="product-images">
+              <img class="primary_image" src="{{'p1.png'| asset_url}}" alt=""/>
+              <img class="secondary_image" src="{{'p2.png'| asset_url}}" alt=""/>
+            </a>
+            <div class="action">
+              <a class="add-cart" href="#" title="Add to cart"></a>
+              <a class="wish" href="#" title="Wishlist"></a>
+              <a class="zoom" href="#" title="Quick view"></a>
+            </div>
+            <!-- End action -->
+          </div>
+          <a href="#" title="Union Bed"><p class="product-title">EXAMPLE PRODUCT</p></a>
+          <p class="product-price-old">$700.00</p>
+          <p class="product-price">$350.00</p>
+
+        </div>
+
+        <!-- End product -->
+      </div>
+      {%endfor%}
+    </div>
+    {%endif%}
+  </div>
+  <!-- End container --> 
+</div>
+{% elsif section.settings.product_style == "v2" %}
+{% include 'product2-template' %}
+{% else %}
+{% include 'product3-template' %}
+{% endif %}
+
+{% if section.settings.newsletter_enable %}
+<div class="section-newsletter about-section-newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter-wrapper newsletter-v2" style="background-color: {{section.settings.newsletter_bg_color}};">
+          <div class="container container-ver2">
+            <div class="row">
+              <div class="col-md-12">
+                {% if settings.newsletter_form_action != blank %}
+                {% assign form_action = settings.newsletter_form_action %}
+                {% else %}
+                {% assign form_action = '#' %}
+                {% endif %}
+
+                <form action="{{form_action}}" class="text-center" method="post">
+                  <label>
+                    <h3>{{section.settings.newletter_title}}</h3>
+                    <p>{{section.settings.newletter_des}}</p>
+                  </label>
+                  <div class="form-group">
+                    <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
+                  </div>
+                  <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+{% comment %}
+To take advantage of a callback on the select dropdown, add option_selection.js
+and customize the JS in timber.productPage as needed.
+
+Currently, timber.productPage does the following:
+- Hides your <select> tag from above
+- Breaks out the product variants into separate product options, if more than one exists
+- Generates a <select> tag for each product option
+- Enables/disables elements based on variant availability
+
+Callback notes:
+- Keep the callback available to the global scope (window.selectCallback) so that advanced
+addons can override it.
+* E.g. multiple currencies http://docs.shopify.com/manual/configuration/store-customization/currencies-and-translations/currencies/how-to-toggle-between-two-currencies
+{% endcomment %}
+<style>
+  {% if section.settings.show_product_swatch =='dropdown' %}
+  .selector-wrapper{
+    display:block;
+  }
+  .swatch{
+    display:none;
+  }
+  {%endif%}
+</style>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $('.slider-single').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      fade: false,
+      adaptiveHeight: true,
+      infinite: false,
+      useTransform: true,
+      speed: 400,
+      cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+    });
+
+    $('.slider-nav')
+    .on('init', function(event, slick) {
+      $('.slider-nav .slick-slide.slick-current').addClass('is-active');
+    })
+    .slick({
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      dots: false,
+      arrows: false,
+      focusOnSelect: false,
+      infinite: false
+    });
+
+    $('.slider-single').on('afterChange', function(event, slick, currentSlide) {
+      $('.slider-nav').slick('slickGoTo', currentSlide);
+      var currrentNavSlideElem = '.slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+      $('.slider-nav .slick-slide.is-active').removeClass('is-active');
+      $(currrentNavSlideElem).addClass('is-active');
+    });
+
+    $('.slider-nav').on('click', '.slick-slide', function(event) {
+      event.preventDefault();
+      var goToSingleSlide = $(this).data('slick-index');
+
+      $('.slider-single').slick('slickGoTo', goToSingleSlide);
+    });
+
+
+    {% if section.settings.enable_zoom %}
+    $('.zoom').zoom();
+    {% endif %}
+  });
+</script>
+<script>
+  var selectCallback = function(variant, selector) {
+    console.log(1);
+    var quantity = 1,
+        totalPrice;
+    if (variant) {
+      console.log(2);
+      if (variant.available) {
+        // Selected a valid variant that is available.
+        $('#AddToCart').removeClass('disabled').removeAttr('disabled').val('Add to Cart').fadeTo(200,1);
+      } else {
+        // Variant is sold out.
+        $('#AddToCart').val('Sold Out').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+      }
+      	quantity = parseInt($('#Quantity').val(), 10);
+        totalPrice = variant.price * quantity;
+        
+        if ( variant.compare_at_price > variant.price ) {
+          $('.enj-product-price').html('<span class="br-product__price">'+ Shopify.formatMoney(variant.price, window.money_format) + '<del>'+Shopify.formatMoney(variant.compare_at_price, window.money_format)+ '</del>' +'</span>');
+          $('#ProductPrice').html('<span class="br-product__price engoj_price_main">'+ Shopify.formatMoney(totalPrice, window.money_format) + '</span>');
+        } else {
+          $('.enj-product-price').html('<span class="br-product__price">'+ Shopify.formatMoney(variant.price, window.money_format) + '</span>');
+          $('#ProductPrice').html('<span class="br-product__price engoj_price_main">'+ Shopify.formatMoney(totalPrice, window.money_format) + '</span>' );
+        }
+                                  
+    } else {
+      // variant doesn't exist.
+      $('#AddToCart').val('Unavailable').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+    }
+
+    /*begin variant image*/
+    if (variant && variant.featured_image) {
+      var originalImage = jQuery(".engoj_img_main");
+      var newImage = variant.featured_image;
+      var element = originalImage[0];
+      Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
+        var $el = $(element);
+        $el.attr('src', newImageSizedSrc);
+        $(".engoj-nav-item :eq(0)").trigger('click');
+        {% if section.settings.enable_zoom %}
+        $('.zoom').zoom();
+        {% endif %}
+      });        
+    }
+    /*end of variant image*/
+  }
+  jQuery(function($) {
+    new Shopify.OptionSelectors('productSelect', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+    });
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+      $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+    {% endif %}
+
+    // Hide selectors if we only have 1 variant and its title contains 'Default'.
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+	 {
+        "type": "select",
+        "id": "product_style",
+        "label": "Select product style",
+        "default": "v1",
+        "options": [
+		  {
+            "value": "v1",
+            "label": "Style 1"
+          },
+          {
+            "value": "v2",
+            "label": "Style 2"
+          },
+		  {
+            "value": "v3",
+            "label": "Style 3"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_zoom",
+        "label": "Enable Zoom function?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_dynamic_checkout",
+        "label": "Enable Dynamic checkout button?",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Product Tab"
+      },
+      
+      {
+        "type": "checkbox",
+        "id": "show_des_tab",
+        "label": "Show des tab?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_custom_tab",
+        "label": "Show custom tab?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_review_tab",
+        "label": "Show review tab?",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Custom tab"
+      },
+      {
+        "type": "text",
+        "id": "custom_tab_title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "custom_tab_content",
+        "label": "Custom tab html"
+      },
+      {
+        "type": "header",
+        "content": "UPSELL product"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_upsell_product",
+        "label": "Show upsell product?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "upsell_product_title",
+        "label": "Upsell product title",
+        "default": "Upsell product"
+      },
+      {
+        "type": "collection",
+        "id": "upsel_collection",
+        "label": "select collection"
+      },
+      {
+        "type": "text",
+        "id": "product_limit",
+        "label": "limit",
+		"default":"9"
+      },
+      {
+        "type": "header",
+        "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme Settings tab > Mailchimp",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "newsletter_enable",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "newsletter_bg_color",
+        "label": "Background color",
+        "default": "#f7f7f7"
+      },
+      {
+        "type": "text",
+        "id": "newletter_title",
+        "label": "Title",
+        "default": "NEWSLETTER"
+      },
+      {
+        "type": "text",
+        "id": "newletter_des",
+        "label": "Description",
+        "default": "TO GET IN TOUCH"
+      },
+      {
+        "type": "text",
+        "id": "newletter_placeholder",
+        "label": "Input placeholder ",
+        "default": "Enter your e-mail"
+      },
+      {
+        "type": "text",
+        "id": "newletter_btn_name",
+        "label": "Button name",
+        "default": "SUBSCRIBE"
+      }
+    ]
+  }
+{% endschema %}
