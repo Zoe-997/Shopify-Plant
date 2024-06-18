@@ -1,0 +1,30 @@
+<header id="header" class="header-v3 header-v2 plant-header-v1 plant-header-v4 {% if settings.headerv4_overlay %}header-top-overlay{% endif %}">
+  <div class="header-top">
+    <div class="container {% if settings.headerv4_layout == "normal" %}container-ver2{% endif %}">
+      <div class="box">
+        <p class="icon-menu-mobile"><i class="fa fa-bars" ></i></p>
+        <div class="box-right">
+          <div class="cart hover-menu">
+            <a href="/cart" class="icon-cart">
+              Cart <span>(<span id="CartCount">{{ cart.item_count }}</span>)</span>
+            </a>
+            {% comment %}
+            {% include "mini-cart" %}
+            {% endcomment %}
+          </div>
+          <div class="search dropdown" data-toggle="modal" data-target=".bs-example-modal-lg">
+            <i class="icon"></i>
+          </div>
+        </div>
+        <div class="logo">
+          <a href="{{shop.url}}"><img src="{% if settings.headerv4_logo == blank %}{{'h2_logo1.png'|asset_url}}{% else %}{{settings.headerv4_logo|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv4_logo_maxwwidth}}" /></a>
+        </div>
+        <div class="logo-mobile"><a href="{{shop.url}}"><img src="{% if settings.headerv4_logo_mobile == blank %}{{'h2_logo1.png'|asset_url}}{% else %}{{settings.headerv4_logo_mobile|img_url:'master'}}{% endif %}" alt="" width="{{settings.headerv4_logo_maxwwidth}}"  /></a></div>
+        
+        {% include "menu" %}
+      </div>                
+    </div>
+    <!-- End container -->
+  </div>
+  <!-- End header-top -->
+</header>

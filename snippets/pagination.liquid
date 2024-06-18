@@ -1,0 +1,23 @@
+<div class="pagination-container {% if template contains 'collection'  %}pagination-collection{% else %}pagination-blog{% endif %}">
+  <nav class="pagination">    
+    {% if paginate.previous %}
+    <a href="{{ paginate.previous.url }}" class="prev page-numbers"><i class="fa fa-angle-left"></i></a>
+    {% endif %}
+
+    {% for part in paginate.parts %}
+    {% if part.is_link %}
+    <a href="{{ part.url }}"  class="page-numbers">{{ part.title }}</a>
+    {% else %}
+    {% if part.title == paginate.current_page %}
+    <span class="page-numbers current">{{ part.title }}</span>
+    {% else %}
+    <a  class="page-numbers">{{ part.title }}</a>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    {% if paginate.next %}
+    <a href="{{ paginate.next.url }}"  class="next page-numbers"><i class="fa fa-angle-right"></i></a>
+    {% endif %}
+  </nav>
+</div>

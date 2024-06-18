@@ -1,0 +1,100 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-countdown-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="mb-30">
+    <div class="container container-ver2 countdown-v1">
+      <div class="row">
+        <div class="col-md-6">
+          <a href="{{section.settings.banner_btnurl}}"><img class="responsive" src="{% if section.settings.banner_img == blank %}https://placehold.it/910x800{% else %}{{section.settings.banner_img|img_url:'master'}}{% endif %}" alt=""></a>
+        </div>
+        <div class="col-md-6 info-countd">
+          <h3 class="text-left text-uppercase">{{section.settings.banner_title}}</h3>
+          <p class="text-left">{{section.settings.banner_des}}</p>
+          <ul data-countdown="section-countdown" data-date="{{section.settings.time}}">
+
+          </ul>
+          <a class="link-v1 bg-brand" href="{{section.settings.banner_btnurl}}">{{section.settings.banner_btnname}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Countdown v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Banner image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Title",
+      "default": "Deal Of The Day"
+    },
+    {
+      "type": "textarea",
+      "id": "banner_des",
+      "label": "Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    {
+      "type": "text",
+      "id": "time",
+      "label": "Set time",
+      "info": "Format datatime: YYYY-MM-DD-hh-mm-ss",
+      "default": "2018-02-25-10-20-30"
+    },
+    {
+      "type": "text",
+      "id": "banner_btnname",
+      "label": "Button name",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "banner_btnurl",
+      "label": "Button URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown v1",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
