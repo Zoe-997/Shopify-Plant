@@ -1,0 +1,360 @@
+{%if template contains 'collection.24' %}
+	{%- assign product_per_page = 24 -%}
+{% elsif template contains 'collection.48' %}
+	{%- assign product_per_page = 48 -%}
+{% else %}
+  {%- assign product_per_page = section.settings.product_limit -%}
+{% endif %}
+
+{% paginate collection.products by product_per_page %}
+
+<div data-section-id="{{ section.id }}" data-section-type="collection-template">
+  <div class="container">
+    <div class="banner-header banner-lbook3 space-30">
+      <img src="{% if collection.handle != 'all' %}{% if collection.image != blank %}{{collection.image|img_url:'master'}}{% else %}{{section.settings.bg_image|img_url:'master'}}{% endif %}{% else %}{{section.settings.bg_image|img_url:'master'}}{% endif %}" alt="Banner-header">
+      <div class="text">
+        <h3>
+          {{ collection.title }}
+        </h3>
+        <p> <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+          <i class="fa fa-caret-right"></i>
+          {% if current_tags %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+          {{ collection.title | link_to: url }}
+          <i class="fa fa-caret-right"></i>
+          {{ current_tags | join: " + " }}
+          {% else %}
+          {{ collection.title }}
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 65px;">
+    {%if section.settings.sidebar_style ==  'left' or section.settings.sidebar_style ==  'right' %}
+    <div id="primary" class="col-xs-12 col-md-9  {%if section.settings.sidebar_style ==  'right'%} float-left{%endif%} ">  
+      {%endif%}
+      {% include "product-sortings" %} 
+      <div class="engoc-row-equal products ver2 grid_full engoj-ajaxload {%if section.settings.sidebar_style ==  'left' or section.settings.sidebar_style ==  'right' %}grid_sidebar{% endif %} hover-shadow furniture grid--uniform">
+        {% for product in collection.products %}
+        <div class="item-inner">
+          <div class="product">
+            <div class="product-images">
+              <a  href="{{product.url}}" title="">
+                <img class="primary_image" src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
+                {% for image in product.images %}
+                {% if forloop.last == true %}
+                <img class="secondary_image" src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
+                {%endif%}
+                {% endfor %}
+              </a>
+            </div>
+            
+            {% assign on_sale = false %}
+            {% if product.compare_at_price > product.price %}
+            {% assign on_sale = true %}
+            {% endif %}
+            
+            <a href="{{ product.url | within: collection }}" title="{{product.title}}"><p class="product-title">{{product.title}}</p></a>
+            {% capture price %}{{ product.price | money }}{% endcapture %}
+			
+            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            
+            {% if on_sale %}
+            <p class="product-price-old">{{ product.compare_at_price | money }}</p>
+            {% endif %}
+
+            <p class="product-price"  {% if on_sale %}{% else %}style=" padding: 0 20px 0 30px; "{% endif %}>{% if product.price_varies %}{{ 'products.general.from_text_html' | t: price: price }}{% else %}{{ price }}{% endif %}</p>
+
+            <p class="description">{{product.description | strip_html | truncatewords: 100}}</p>
+            <div class="action">
+
+              {% if product.variants.size > 1 %}
+              <a class="add-cart" href="{{ product.url | within: collection }}" title="{{settings.product_select_option_name }}">
+              </a>
+              {% else %}
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                <button type="submit" name="add" id="AddToCart{{ product.id }}" class="add-cart add-to-cart-button enj-add-to-cart-btn" title="{{ settings.product_cart_name }}">
+
+                </button>
+              </form>
+              {% endif %}
+              {%include 'add-wishlist'%}
+              <a href="javascript:void(0)"  data-id="{{ product.handle }}" class="zoom quick-view engoj-btn-quickview" title="{{ settings.product_quickview_name }}">
+              </a>
+            </div>
+            
+            <div class="action-plant">
+              {% if product.variants.size > 1 %}
+              <a href="{{ product.url | within: collection }}" class="button-addcart" title="{{settings.product_select_option_name }}">{{settings.product_select_option_name }}</a>
+              {% else %}
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                <button type="submit" name="add" id="AddToCart{{ product.id }}" class="button-addcart enj-add-to-cart-btn" title="{{ settings.product_cart_name }}">
+                  {{ settings.product_cart_name }}
+                </button>
+              </form>
+              {% endif %}
+              {%include 'add-wishlist'%}
+              <a href="javascript:void(0)"  data-id="{{ product.handle }}" class="zoom quick-view engoj-btn-quickview" title="{{ settings.product_quickview_name }}">
+              </a>
+            </div>
+
+            <!-- End action -->
+            <div class="social box">
+              <h3>Share this :</h3>
+              {%include 'social-share'%}
+            </div>
+          </div>
+          <!-- End product -->
+        </div>
+
+        {%endfor%}
+
+      </div>
+      
+      {%if section.settings.sidebar_style ==  'left' or section.settings.sidebar_style ==  'right' %}
+      <!-- End product-content products  -->
+      {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+      {% endif %}
+      {% else %}
+      
+      {% if paginate.pages > 1 %}
+      <div class="ajax-load-page" id="more">
+        <p class="text-center">
+          <a class="link-v1 bg-brand" href="javascript:void(0)" title="{{section.settings.btn_name_ajax}}">{{section.settings.btn_name_ajax}}</a>
+        </p>
+      </div>
+      {% endif %}
+      
+      {% endif %}
+      
+      <!-- End pagination-container -->
+      {%if section.settings.sidebar_style ==  'left' or section.settings.sidebar_style ==  'right' %}
+    </div>
+    {%endif%}
+    <!-- End Primary -->
+    {%if section.settings.sidebar_style ==  'left' or section.settings.sidebar_style ==  'right' %}
+    <div id="secondary" class="widget-area col-xs-12 col-md-3{%if section.settings.sidebar_style ==  'right'%} float-right{%endif%}  ">
+      {% include 'collection-sidebar' %}
+    </div>
+    {%endif%}
+    <!-- End Secondary -->
+  </div>
+  
+  {% if section.settings.newsletter_enable %}
+    {% if section.settings.newsletter_layout == "style1" %}
+    <div class="section-newsletter">
+      <div class="container container-ver2">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="newsletter-wrapper">
+              <h3 class="text-center">{{section.settings.newletter_title}}</h3>
+              <p class="text-center">{{section.settings.newletter_des}}</p>
+
+              {% if settings.newsletter_form_action != blank %}
+              {% assign form_action = settings.newsletter_form_action %}
+              {% else %}
+              {% assign form_action = '#' %}
+              {% endif %}
+
+              <form action="{{form_action}}" class="text-center" method="post">
+                <div class="form-group">
+                  <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
+                </div>
+                <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% elsif section.settings.newsletter_layout == "style2" %}
+    <div class="section-newsletter about-section-newsletter">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="newsletter-wrapper newsletter-v2" style="background-color: {{section.settings.newsletter_bg_color}};">
+              <div class="container container-ver2">
+                <div class="row">
+                  <div class="col-md-12">
+                    {% if settings.newsletter_form_action != blank %}
+                    {% assign form_action = settings.newsletter_form_action %}
+                    {% else %}
+                    {% assign form_action = '#' %}
+                    {% endif %}
+
+                    <form action="{{form_action}}" class="text-center" method="post">
+                      <label>
+                        <h3>{{section.settings.newletter_title}}</h3>
+                        <p>{{section.settings.newletter_des}}</p>
+                      </label>
+                      <div class="form-group">
+                        <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
+                      </div>
+                      <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endif %}
+  
+</div>
+
+
+<style>
+  .pagination-collection .pagination {
+    {% if section.settings.sidebar_style ==  'left' %}
+    text-align: right !important;
+    {% elsif section.settings.sidebar_style ==  'right' %}
+    text-align: left !important;
+    {% endif %}
+  }
+</style>
+
+{% if section.settings.sidebar_style ==  'no' %}
+<script>
+  $(document).ready(function() {
+    var counter = 2
+    var pages = Math.ceil('{{ collection.all_products_count }}' / {{ product_per_page }});
+    var maxCount = pages + 1;
+    console.log("Pages Found: " + pages);
+
+    console.log("Collection Title: {{ collection.handle }}");
+
+      $('#more p a').click(function(e) {
+
+      e.preventDefault();
+
+      var getUrl = "{{shop.url}}/collections/{{ collection.handle }}?page="+counter;
+      console.log(getUrl);
+      $.ajax({
+        url: getUrl,
+        type:'GET',
+        beforeSend: function() {
+          showPopup('.loading');
+        },
+        success: function(data){
+          hidePopup('.loading');
+          $(".engoj-ajaxload").append($(data).find('.item-inner').parent().html());
+          counter++;
+
+          if(counter == maxCount ) {
+            $('#more').empty();
+          }
+
+        }
+      });
+    });
+  });
+</script>
+{% endif %}
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection pages",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "select",
+      "id": "sidebar_style",
+      "label": "Layout",
+      "default": "no",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left sidebar"
+        },
+        {
+          "value": "right",
+          "label": "Right sidebar"
+        },
+        {
+          "value": "no",
+          "label": "No sidebar"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "btn_name_ajax",
+      "label": "Button name (Ajaxload)",
+      "info": "*only for Layout No sidebar",
+      "default": "Load more"
+    },
+    {
+      "type": "text",
+      "id": "product_limit",
+      "label": "Product per page",
+      "default": "20"
+    },
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme Settings tab > Mailchimp",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Enable",
+      "default": true
+    },
+    {
+       "type": "select",
+       "id": "newsletter_layout",
+       "options": [
+          { "value": "style1", "label": "Style 1"},
+          { "value": "style2", "label": "Style 2"}
+       ],
+       "label": "Layout",
+       "default": "style2"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_bg_color",
+      "label": "Background color",
+      "default": "#f7f7f7",
+      "info": "*only for Style 2"
+    },
+    {
+      "type": "text",
+      "id": "newletter_title",
+      "label": "Title",
+      "default": "NEWSLETTER"
+    },
+    {
+      "type": "text",
+      "id": "newletter_des",
+      "label": "Description",
+      "default": "TO GET IN TOUCH"
+    },
+    {
+      "type": "text",
+      "id": "newletter_placeholder",
+      "label": "Input placeholder ",
+      "default": "Enter your e-mail"
+    },
+    {
+      "type": "text",
+      "id": "newletter_btn_name",
+      "label": "Button name",
+      "default": "SUBSCRIBE"
+    }
+  ]
+}
+{% endschema %}
