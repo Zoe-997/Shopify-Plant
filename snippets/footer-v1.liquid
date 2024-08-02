@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="footer-top">
           {% if settings.fv1_copyright == blank %}
-          <p>Copyright &copy; {{ 'now' | date: "%Y" }} by <a href="http://shopilaunch.com" title="ShopiLaunch" target="_blank">ShopiLaunch</a>. <span>{{ powered_by_link }}</span></p>
+          <p>Copyright &copy; {{ 'now' | date: "%Y" }} by <a href="#" title="{{ shop.name }}" target="_blank">{{ shop.name }}</a>. <span>{{ powered_by_link }}</span></p>
           {% else %}
           <p>{{settings.fv1_copyright}}</p>
           {% endif %}
