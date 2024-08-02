@@ -1935,22 +1935,25 @@
           "1514280113017-0": {
             "type": "banner",
             "settings": {
-              "banner_title": "Office Plant",
-              "banner_url": "shopify:\/\/collections\/all"
+              "banner_img": "shopify:\/\/shop_images\/pexels-pixabay-37347.jpg",
+              "banner_title": "Office Room",
+              "banner_url": "shopify:\/\/collections\/home-office-furniture"
             }
           },
           "1514280113017-1": {
             "type": "banner",
             "settings": {
-              "banner_title": "Garden Plant",
-              "banner_url": "shopify:\/\/collections\/all"
+              "banner_img": "shopify:\/\/shop_images\/pexels-rpnickson-7238759.jpg",
+              "banner_title": "Game Furniture",
+              "banner_url": "shopify:\/\/collections\/gaming-furniture"
             }
           },
           "1514280113017-2": {
             "type": "banner",
             "settings": {
-              "banner_title": "House Plant",
-              "banner_url": "shopify:\/\/collections\/all"
+              "banner_img": "shopify:\/\/shop_images\/pexels-vika-glitter-392079-1648768.jpg",
+              "banner_title": "Kid Furniture",
+              "banner_url": "shopify:\/\/collections\/kids-furniture"
             }
           }
         },
