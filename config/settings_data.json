@@ -2002,6 +2002,8 @@
           "1514625015410-1": {
             "type": "slideshow",
             "settings": {
+              "slideshow_img_desktop": "shopify:\/\/shop_images\/pexels-valeriya-1129413.jpg",
+              "slideshow_img": "shopify:\/\/shop_images\/pexels-emrecan-2079246.jpg",
               "slideshow_title": "Howea Forsteriana",
               "slideshow_content1": "$700.00",
               "slideshow_content2": "$350.00",
