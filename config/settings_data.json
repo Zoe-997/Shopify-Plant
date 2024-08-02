@@ -1869,7 +1869,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "All Products",
-              "product_collection": "new-zone9",
+              "product_collection": "frontpage",
               "product_limit": "10"
             }
           },
@@ -1877,7 +1877,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Living room",
-              "product_collection": "hot-zone5",
+              "product_collection": "living-room",
               "product_limit": "10"
             }
           },
@@ -1893,7 +1893,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Bedroom",
-              "product_collection": "new-zone9",
+              "product_collection": "bedroom",
               "product_limit": "10"
             }
           },
@@ -1901,7 +1901,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Bathroom",
-              "product_collection": "hot-zone5",
+              "product_collection": "bathroom",
               "product_limit": "10"
             }
           },
@@ -1909,7 +1909,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Kitchen",
-              "product_collection": "sale-zone4",
+              "product_collection": "dinnerroom",
               "product_limit": "10"
             }
           }
