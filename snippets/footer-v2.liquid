@@ -5,7 +5,7 @@
         <div class="footer-top footer-tov2">
           {% if settings.fv2_copyright == blank %}
           <p>Copyright &copy; {{ 'now' | date: "%Y" }} by 
-            <<a href="#" title="{{ shop.name }}" target="_blank">{{ shop.name }}</a>. 
+            <a href="#" title="{{ shop.name }}" target="_blank">{{ shop.name }}</a>. 
             <span>{{ powered_by_link }}</span></p>
           {% else %}
           <p>{{settings.fv2_copyright}}</p>
