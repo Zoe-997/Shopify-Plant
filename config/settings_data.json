@@ -2029,40 +2029,37 @@
           "1517224003943": {
             "type": "contact",
             "settings": {
-              "icon_img": "shopify:\/\/shop_images\/contact-icon1.png",
               "ct_title": "ADDRESS",
-              "ct_label1": "France:",
-              "ct_content1": "Contrada Isola 14, Macerata, 62100 France",
-              "ct_label2": "Filand:",
-              "ct_content2": "Via Cavour, 14 30026 Portogruaro Filand",
-              "ct_label3": "Singapore:",
-              "ct_content3": "76 Le Lai Street, District 1, Ho Chi Minh City, Vietnam"
+              "ct_label1": "",
+              "ct_content1": "",
+              "ct_label2": "",
+              "ct_content2": "30 n gould st ste n sheridan wy 82801",
+              "ct_label3": "",
+              "ct_content3": ""
             }
           },
           "1517224005736": {
             "type": "contact",
             "settings": {
-              "icon_img": "shopify:\/\/shop_images\/contact-icon2.png",
-              "ct_title": "E-MAIL",
-              "ct_label1": "France:",
-              "ct_content1": "shopilaunch@gmail.com",
-              "ct_label2": "Filand:",
-              "ct_content2": "shopilaunch@gmail.com",
-              "ct_label3": "Singapore:",
-              "ct_content3": "shopilaunch@gmail.com"
+              "ct_title": "EMAIL",
+              "ct_label1": "",
+              "ct_content1": "firniture@vuthilan.store",
+              "ct_label2": "",
+              "ct_content2": "",
+              "ct_label3": "",
+              "ct_content3": ""
             }
           },
           "1517224007216": {
             "type": "contact",
             "settings": {
-              "icon_img": "shopify:\/\/shop_images\/contact-icon3.png",
               "ct_title": "PHONE",
-              "ct_label1": "France:",
-              "ct_content1": "+387 68 4521 365 89",
-              "ct_label2": "Filand:",
-              "ct_content2": "+387 68 4521 365 88",
-              "ct_label3": "Singapore:",
-              "ct_content3": "+387 68 4521 365 99"
+              "ct_label1": "",
+              "ct_content1": "firniture@vuthilan.store",
+              "ct_label2": "",
+              "ct_content2": "",
+              "ct_label3": "",
+              "ct_content3": ""
             }
           }
         },
@@ -2072,8 +2069,6 @@
           "1517224007216"
         ],
         "settings": {
-          "bg_image_breadcrumb": "shopify:\/\/shop_images\/header-contactus-page.jpg",
-          "bg_image_left": "shopify:\/\/shop_images\/contactus-img.jpg",
           "title_1": "First Name",
           "title_2": "E-mail",
           "title_3": "Phone Number",
