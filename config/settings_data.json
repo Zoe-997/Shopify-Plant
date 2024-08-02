@@ -1792,12 +1792,11 @@
       "collection-template": {
         "type": "collection-template",
         "settings": {
-          "bg_image": "shopify:\/\/shop_images\/header-collection-page.jpg",
           "sidebar_style": "right",
           "btn_name_ajax": "Load more",
           "product_limit": "20",
           "newsletter_enable": true,
-          "newsletter_layout": "style2",
+          "newsletter_layout": "style1",
           "newsletter_bg_color": "#f7f7f7",
           "newletter_title": "NEWSLETTER",
           "newletter_des": "TO GET IN TOUCH",
