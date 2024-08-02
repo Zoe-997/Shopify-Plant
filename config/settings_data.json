@@ -106,7 +106,7 @@
     "product_select_option_name": "Select Option",
     "product_wistlist_name": "Add to Wishlist",
     "product_quickview_name": "Quickview",
-    "sidebar_enable_category_collection": true,
+    "sidebar_enable_category_collection": false,
     "sidebar_category_title": "category",
     "sidebar_category_collection": "main-menu",
     "filter_enable": true,
@@ -141,7 +141,7 @@
     "shop_by_tags_3_list_tags": "X,M,L,XL, 2XL, 3XL",
     "brands_enable": true,
     "brands_title": "brands",
-    "bestseller_enable": true,
+    "bestseller_enable": false,
     "bestseller_title": "Featured Products",
     "bestseller_collection": "top-zone1",
     "bestseller_limit": "4",
@@ -1792,7 +1792,7 @@
       "collection-template": {
         "type": "collection-template",
         "settings": {
-          "sidebar_style": "right",
+          "sidebar_style": "left",
           "btn_name_ajax": "Load more",
           "product_limit": "20",
           "newsletter_enable": true,
