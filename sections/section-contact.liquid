@@ -1,42 +1,65 @@
-<div data-section-id="{{ section.id }}" data-section-type="section-contact" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+<div
+  data-section-id="{{ section.id }}"
+  data-section-type="section-contact"
+  style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}"
+>
   <div class="container contact-v1">
     <div class="container container-ver2 ">
       <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12 contact-left">
-          <h3>{{section.settings.ci_title}}</h3>
-          <p>{{section.settings.ci_des}}</p>
+          <h3>{{ section.settings.ci_title }}</h3>
+          <p>{{ section.settings.ci_des }}</p>
+          <div>{{ section.settings.company_name }}</div>
           <ul class="contact">
-            <li><strong>{{section.settings.ci_phone_title}}</strong>{{section.settings.ci_phone_content}}</li>
-            <li><strong>{{section.settings.ci_email_title}}</strong>{{section.settings.ci_email_content}}</li>
-            <li><strong>{{section.settings.ci_address_title}}</strong>{{section.settings.ci_address_content}}</li>
+            <li>
+              <strong>{{ section.settings.ci_phone_title }}</strong>{{ section.settings.ci_phone_content }}
+            </li>
+            <li>
+              <strong>{{ section.settings.ci_email_title }}</strong>{{ section.settings.ci_email_content }}
+            </li>
+            <li>
+              <strong>{{ section.settings.ci_address_title }}</strong>{{ section.settings.ci_address_content }}
+            </li>
           </ul>
           <ul class="social" data-theme-editor-setting="fv1_social">
-            {{section.settings.ci_social}}
+            {{ section.settings.ci_social }}
           </ul>
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12 form-contact">
-          <div class="text"><span>{{section.settings.cf_title}}</span></div>
-          {% form 'contact' %}
-          {% if form.posted_successfully? %}
-          <p class="note form-success">
-            {{ 'contact.form.post_success' | t }}
-          </p>
-          {% endif %}
-          {{ form.errors | default_errors }}
-          <div>
-            <input name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}" class="form-control" type="text" placeholder="{{section.settings.cf_placeholder_name}}">
-            <input name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="form-control {% if form.errors contains 'email' %}mail--error{% endif %}" type="email" placeholder="{{section.settings.cf_placeholder_email}}">
-            <textarea name="contact[body]" placeholder="{{section.settings.cf_placeholder_message}}"></textarea>
-            <button type="submit">{{section.settings.cf_placeholder_btname}}</button>
+          <div class="text">
+            <span>{{ section.settings.cf_title }}</span>
           </div>
+          {% form 'contact' %}
+            {% if form.posted_successfully? %}
+              <p class="note form-success">
+                {{ 'contact.form.post_success' | t }}
+              </p>
+            {% endif %}
+            {{ form.errors | default_errors }}
+            <div>
+              <input
+                name="contact[name]"
+                value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                class="form-control"
+                type="text"
+                placeholder="{{section.settings.cf_placeholder_name}}"
+              >
+              <input
+                name="contact[email]"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                class="form-control {% if form.errors contains 'email' %}mail--error{% endif %}"
+                type="email"
+                placeholder="{{section.settings.cf_placeholder_email}}"
+              >
+              <textarea name="contact[body]" placeholder="{{section.settings.cf_placeholder_message}}"></textarea>
+              <button type="submit">{{ section.settings.cf_placeholder_btname }}</button>
+            </div>
           {% endform %}
         </div>
-
       </div>
     </div>
   </div>
 </div>
-
 
 {% schema %}
 {
@@ -58,6 +81,12 @@
       "id": "ci_des",
       "label": "Description",
       "default": "Alienum phaedrum torquatos nec eu, vis detraxit serpents periculiser ex, nihil expetendis in mei. Meis an pericula eres euripidis, hinces partem ei est. Eos ei nisl graecis."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "company_name",
+      "default": "my <i>inline</i> <b>text</b>",
+      "label": "Inline rich text"
     },
     {
       "type": "text",
