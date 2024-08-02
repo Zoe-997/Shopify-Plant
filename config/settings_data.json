@@ -2069,6 +2069,7 @@
           "1517224007216"
         ],
         "settings": {
+          "bg_image_left": "shopify:\/\/shop_images\/contactus-img.jpg",
           "title_1": "First Name",
           "title_2": "E-mail",
           "title_3": "Phone Number",
