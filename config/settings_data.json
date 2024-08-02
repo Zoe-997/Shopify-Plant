@@ -2117,43 +2117,43 @@
           },
           "1517282762814": {
             "type": "brand",
+            "disabled": true,
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand1.jpg",
               "brand_url": "shopify:\/\/collections\/all"
             }
           },
           "1517282764638": {
             "type": "brand",
+            "disabled": true,
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand2.jpg",
               "brand_url": "shopify:\/\/collections\/all"
             }
           },
           "1517282766414": {
             "type": "brand",
+            "disabled": true,
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand3.jpg",
               "brand_url": "shopify:\/\/collections\/all"
             }
           },
           "1517282768219": {
             "type": "brand",
+            "disabled": true,
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand4.jpg",
               "brand_url": "shopify:\/\/collections\/all"
             }
           },
           "1517282770254": {
             "type": "brand",
+            "disabled": true,
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand5.jpg",
               "brand_url": "shopify:\/\/collections\/all"
             }
           },
           "1517282771814": {
             "type": "brand",
+            "disabled": true,
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand4.jpg",
               "brand_url": "shopify:\/\/collections\/all"
             }
           }
@@ -2170,7 +2170,7 @@
           "1517282771814"
         ],
         "settings": {
-          "bg_image_breadcrumb": "shopify:\/\/shop_images\/aboutus-bg.jpg",
+          "bg_image_breadcrumb": "shopify:\/\/shop_images\/aboutus-bg.webp",
           "enable_block": true,
           "bh_content": "The most important things are not things so we’ll design experiences",
           "bh_des": "by ShopiLaunch",
