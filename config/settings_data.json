@@ -1793,7 +1793,7 @@
         "type": "collection-template",
         "settings": {
           "bg_image": "shopify:\/\/shop_images\/header-collection-page.jpg",
-          "sidebar_style": "left",
+          "sidebar_style": "no",
           "btn_name_ajax": "Load more",
           "product_limit": "20",
           "newsletter_enable": true,
