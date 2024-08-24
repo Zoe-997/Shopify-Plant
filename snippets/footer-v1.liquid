@@ -4,24 +4,34 @@
       <div class="col-md-12">
         <div class="footer-top">
           {% if settings.fv1_copyright == blank %}
-          <p>Copyright &copy; {{ 'now' | date: "%Y" }} by <a href="http://shopilaunch.com" title="ShopiLaunch" target="_blank">ShopiLaunch</a>. <span>{{ powered_by_link }}</span></p>
+            <p>
+              Copyright &copy; {{ 'now' | date: '%Y' }} by
+              <a href="#" title="{{ shop.name }}" target="_blank">{{ shop.name }}</a>.
+              <span>{{ powered_by_link }}</span>
+            </p>
           {% else %}
-          <p>{{settings.fv1_copyright}}</p>
+            <p>{{ settings.fv1_copyright }}</p>
           {% endif %}
           <p class="flag-location">
             <a href="{{settings.fv1_location_url}}">
-              <img src="{% if settings.fv1_location_img == blank %}https://placehold.it/22x22{% else %}{{settings.fv1_location_img|img_url:'master'}}{% endif %}" alt="">{{settings.fv1_location_content}}
+              <img
+                src="{% if settings.fv1_location_img == blank %}https://placehold.it/22x22{% else %}{{settings.fv1_location_img|img_url:'master'}}{% endif %}"
+                alt=""
+              >
+              {{- settings.fv1_location_content }}
             </a>
           </p>
         </div>
         <div class="footer-bottom">
           <ul class="contact-info">
             {% for link in linklists[settings.fv1_info_menu].links %}
-            <li><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+              <li>
+                <a href="{{link.url}}" title="{{link.title}}">{{ link.title }}</a>
+              </li>
             {% endfor %}
           </ul>
           <ul class="social">
-            {{settings.fv1_social}}
+            {{ settings.fv1_social }}
           </ul>
         </div>
       </div>
