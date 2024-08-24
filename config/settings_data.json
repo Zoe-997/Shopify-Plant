@@ -1968,47 +1968,35 @@
               "ct_content3": "SHERIDAN WY 82801"
             }
           },
-          "1517224005736": {
-            "type": "contact",
-            "settings": {
-              "ct_title": "E-MAIL",
-              "ct_label1": "France:",
-              "ct_content1": "shopilaunch@gmail.com",
-              "ct_label2": "Filand:",
-              "ct_content2": "shopilaunch@gmail.com",
-              "ct_label3": "Singapore:",
-              "ct_content3": "shopilaunch@gmail.com"
-            }
-          },
           "contact_XLErph": {
             "type": "contact",
             "settings": {
               "icon_img": "shopify:\/\/shop_images\/contact-icon2.png",
-              "ct_title": "Title",
-              "ct_label1": "Label 1",
-              "ct_content1": "Content 1",
-              "ct_label2": "Label 2",
-              "ct_content2": "Content 2",
-              "ct_label3": "Label 3",
-              "ct_content3": "Content 3"
+              "ct_title": "E-MAIL",
+              "ct_label1": "",
+              "ct_content1": "plant@phamthihoa.store",
+              "ct_label2": "",
+              "ct_content2": "",
+              "ct_label3": "",
+              "ct_content3": ""
             }
           },
           "1517224007216": {
             "type": "contact",
             "settings": {
+              "icon_img": "shopify:\/\/shop_images\/contact-icon3.png",
               "ct_title": "PHONE",
-              "ct_label1": "France:",
-              "ct_content1": "+387 68 4521 365 89",
-              "ct_label2": "Filand:",
-              "ct_content2": "+387 68 4521 365 88",
-              "ct_label3": "Singapore:",
-              "ct_content3": "+387 68 4521 365 99"
+              "ct_label1": "",
+              "ct_content1": "0123456789",
+              "ct_label2": "",
+              "ct_content2": "",
+              "ct_label3": "",
+              "ct_content3": ""
             }
           }
         },
         "block_order": [
           "1517224003943",
-          "1517224005736",
           "contact_XLErph",
           "1517224007216"
         ],
