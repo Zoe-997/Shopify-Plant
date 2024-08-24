@@ -1884,7 +1884,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Outdoor",
-              "product_collection": "sale-zone4",
+              "product_collection": "entryway-furniture",
               "product_limit": "10"
             }
           },
@@ -1892,7 +1892,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Bedroom",
-              "product_collection": "bedroom",
+              "product_collection": "bedroom-furniture",
               "product_limit": "10"
             }
           },
@@ -1900,7 +1900,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Bathroom",
-              "product_collection": "bathroom",
+              "product_collection": "bathroom-furniture",
               "product_limit": "10"
             }
           },
@@ -1908,7 +1908,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Kitchen",
-              "product_collection": "dinnerroom",
+              "product_collection": "kitchen",
               "product_limit": "10"
             }
           }
