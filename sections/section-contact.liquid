@@ -3,7 +3,7 @@
   data-section-type="section-contact"
   style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}"
 >
-  <div class="container contact-v1">
+  <div class="contact-{{ section.id }} container contact-v1">
     <div class="container container-ver2 ">
       <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12 contact-left">
@@ -61,6 +61,14 @@
   </div>
 </div>
 
+<style>
+  .contact-{{ section.id }} {
+    color: section.settings.color;
+    background: section.settings.background;
+  }
+</style>
+
+
 {% schema %}
 {
   "name": "Contact",
@@ -81,6 +89,18 @@
       "id": "ci_des",
       "label": "Description",
       "default": "Alienum phaedrum torquatos nec eu, vis detraxit serpents periculiser ex, nihil expetendis in mei. Meis an pericula eres euripidis, hinces partem ei est. Eos ei nisl graecis."
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Backgroud-color",
+      "default": "#ffd5c3"
     },
     {
       "type": "inline_richtext",
