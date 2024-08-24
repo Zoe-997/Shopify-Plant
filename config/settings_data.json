@@ -2044,42 +2044,42 @@
               "t_customer_info": "CEO & Founder ShopiLaunch"
             }
           },
-          "1517282762814": {
-            "type": "brand",
-            "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand1.jpg",
-              "brand_url": "shopify:\/\/collections\/all"
-            }
-          },
           "1517282764638": {
             "type": "brand",
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand2.jpg",
-              "brand_url": "shopify:\/\/collections\/all"
+              "brand_image": "shopify:\/\/shop_images\/aboutus-brand4.jpg",
+              "brand_url": "shopify:\/\/collections\/frontpage"
             }
           },
           "1517282766414": {
             "type": "brand",
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand3.jpg",
-              "brand_url": "shopify:\/\/collections\/all"
+              "brand_image": "shopify:\/\/shop_images\/aboutus-brand2.jpg",
+              "brand_url": "shopify:\/\/collections\/hot-trend"
             }
           },
           "1517282768219": {
             "type": "brand",
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand4.jpg",
-              "brand_url": "shopify:\/\/collections\/all"
+              "brand_image": "shopify:\/\/shop_images\/aboutus-brand1.jpg",
+              "brand_url": "shopify:\/\/collections\/kitchen"
             }
           },
           "1517282770254": {
             "type": "brand",
             "settings": {
-              "brand_image": "shopify:\/\/shop_images\/aboutus-brand5.jpg",
-              "brand_url": "shopify:\/\/collections\/all"
+              "brand_image": "shopify:\/\/shop_images\/aboutus-brand3.jpg",
+              "brand_url": "shopify:\/\/collections\/office-room"
             }
           },
           "1517282771814": {
+            "type": "brand",
+            "settings": {
+              "brand_image": "shopify:\/\/shop_images\/aboutus-brand5.jpg",
+              "brand_url": "shopify:\/\/collections\/out-door"
+            }
+          },
+          "brand_CNVtV9": {
             "type": "brand",
             "settings": {
               "brand_image": "shopify:\/\/shop_images\/aboutus-brand4.jpg",
@@ -2091,12 +2091,12 @@
           "1517282756536",
           "1517282759070",
           "1517282761002",
-          "1517282762814",
           "1517282764638",
           "1517282766414",
           "1517282768219",
           "1517282770254",
-          "1517282771814"
+          "1517282771814",
+          "brand_CNVtV9"
         ],
         "settings": {
           "bg_image_breadcrumb": "shopify:\/\/shop_images\/aboutus-bg.jpg",
@@ -2113,7 +2113,7 @@
           "b3_content1": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           "b3_content2": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions...",
           "enable_testimonial": true,
-          "testimonial_bg": "shopify:\/\/shop_images\/aboutus-testimonial-bg.jpg",
+          "testimonial_bg": "shopify:\/\/shop_images\/collection.jpg",
           "enable_brand": true,
           "enable_newsletter": true,
           "newsletter_bg_color": "#f7f7f7",
