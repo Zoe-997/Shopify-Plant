@@ -1916,7 +1916,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "All Products",
-              "product_collection": "new-zone9",
+              "product_collection": "frontpage",
               "product_limit": "10"
             }
           },
@@ -1924,7 +1924,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Plants",
-              "product_collection": "hot-zone5",
+              "product_collection": "best-zone-1",
               "product_limit": "10"
             }
           },
@@ -1932,7 +1932,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Outdoor Plant Pots",
-              "product_collection": "sale-zone4",
+              "product_collection": "best-zone-2",
               "product_limit": "10"
             }
           },
@@ -1940,7 +1940,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Plant Stands & Movers",
-              "product_collection": "new-zone9",
+              "product_collection": "best-zone-3",
               "product_limit": "10"
             }
           },
@@ -1948,7 +1948,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Dried Flowers & Potpourri",
-              "product_collection": "hot-zone5",
+              "product_collection": "best-zone-4",
               "product_limit": "10"
             }
           },
@@ -1956,7 +1956,7 @@
             "type": "Collection",
             "settings": {
               "product_collection_title": "Growing Accessories",
-              "product_collection": "sale-zone4",
+              "product_collection": "best-zone-5",
               "product_limit": "10"
             }
           }
