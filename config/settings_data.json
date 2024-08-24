@@ -1876,8 +1876,8 @@
       "1514198930452": {
         "type": "section-product-v3",
         "settings": {
-          "product_collection": "new-zone9",
-          "product_limit": "12",
+          "product_collection": "hot-trend",
+          "product_limit": "8",
           "product_title": "Best seller products",
           "product_btn_name": "All Products",
           "margin_top": "",
