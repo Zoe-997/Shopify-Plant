@@ -27,9 +27,24 @@
           <div class="block-content">
             <h3>{{block.settings.ct_title}}</h3>
             <ul>
-              <li><span>{{block.settings.ct_label1}}</span><span>{{block.settings.ct_content1}}</span></li>
-              <li><span>{{block.settings.ct_label2}}</span><span>{{block.settings.ct_content2}}</span></li>
-              <li><span>{{block.settings.ct_label3}}</span><span>{{block.settings.ct_content3}}</span></li>
+               <li>
+    {%- if block.settings.ct_label1 != blank -%}
+      <span>{{block.settings.ct_label1}}</span>      
+    {%- endif -%}
+    <span>{{block.settings.ct_content1}}</span>
+  </li>
+  <li>
+    {%- if block.settings.ct_label2 != blank -%}
+      <span>{{block.settings.ct_label2}}</span>      
+    {%- endif -%}
+    <span>{{block.settings.ct_content2}}</span>
+    </li>
+  <li>
+    {%- if block.settings.ct_label3 != blank -%}
+      <span>{{block.settings.ct_label3}}</span>      
+    {%- endif -%}
+    <span>{{block.settings.ct_content3}}</span>
+  </li>
             </ul>
           </div>
         </div>
