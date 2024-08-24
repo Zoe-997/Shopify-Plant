@@ -145,7 +145,7 @@
     "bestseller_title": "Featured Products",
     "bestseller_collection": "top-zone1",
     "bestseller_limit": "4",
-    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "favicon": "shopify:\/\/shop_images\/favicon-2.jpg",
     "gmap_key": "AIzaSyDbivLWAyn4u38XSGxSjkomRtnyuGX7YLw",
     "gmap_latitude": "33.3209127",
     "gmap_longitude": "-111.8005377",
@@ -1977,7 +1977,7 @@
         "settings": {
           "product_title": "The most important things are not things",
           "product_des": "so we’ll design experiences.",
-          "product_collection": "top-zone1",
+          "product_collection": "best-zone-1",
           "product_limit": "5",
           "margin_top": "",
           "margin_bottom": ""
