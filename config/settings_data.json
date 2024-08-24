@@ -1927,14 +1927,14 @@
           "1514625029697-0": {
             "type": "slideshow",
             "settings": {
-              "slideshow_img": "shopify:\/\/shop_images\/s1.jpg",
+              "slideshow_img": "shopify:\/\/shop_images\/home5_bg3.jpg",
               "slideshow_url": "shopify:\/\/collections\/all"
             }
           },
           "1514625029697-1": {
             "type": "slideshow",
             "settings": {
-              "slideshow_img": "shopify:\/\/shop_images\/s2.jpg",
+              "slideshow_img": "shopify:\/\/shop_images\/home5_bg1.jpg",
               "slideshow_url": "shopify:\/\/collections\/all"
             }
           }
