@@ -2076,7 +2076,7 @@
         ],
         "settings": {
           "bg_image_breadcrumb": "shopify:\/\/shop_images\/header-contactus-page_200x200_9d8f50b2-7943-4aad-8b41-24b9547f2377.jpg",
-          "bg_image_left": "shopify:\/\/shop_images\/contactus-img_200x200_06986e91-7f67-49d8-b703-13329cff1691.jpg",
+          "bg_image_left": "shopify:\/\/shop_images\/contactus-img.jpg",
           "title_1": "First Name",
           "title_2": "E-mail",
           "title_3": "Phone Number",
