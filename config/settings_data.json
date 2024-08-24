@@ -1792,7 +1792,7 @@
       "collection-template": {
         "type": "collection-template",
         "settings": {
-          "bg_image": "shopify:\/\/shop_images\/header-collection-page.jpg",
+          "bg_image": "shopify:\/\/shop_images\/collection.jpg",
           "sidebar_style": "no",
           "btn_name_ajax": "Load more",
           "product_limit": "20",
