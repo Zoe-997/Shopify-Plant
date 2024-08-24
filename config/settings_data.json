@@ -1868,6 +1868,7 @@
           "1500375766724-0": {
             "type": "policy",
             "settings": {
+              "icon_policy": "shopify:\/\/shop_images\/icon-shipping-1.png",
               "policy_text_1": "FREE SHIPPING",
               "policy_text_2": "ON ORDER OVER $500"
             }
@@ -1875,6 +1876,7 @@
           "1500375766724-1": {
             "type": "policy",
             "settings": {
+              "icon_policy": "shopify:\/\/shop_images\/icon-shipping-2.png",
               "policy_text_1": "SUPPORT",
               "policy_text_2": "LIFE TIME SUPPORT 24\/7"
             }
@@ -1882,6 +1884,7 @@
           "1500375766724-2": {
             "type": "policy",
             "settings": {
+              "icon_policy": "shopify:\/\/shop_images\/icon-shipping-3.png",
               "policy_text_1": "HELP PARTNER",
               "policy_text_2": "HELP ALL ASPECTS"
             }
@@ -1889,6 +1892,7 @@
           "1500375766724-3": {
             "type": "policy",
             "settings": {
+              "icon_policy": "shopify:\/\/shop_images\/icon-shipping-4.png",
               "policy_text_1": "CONTACT WITH US",
               "policy_text_2": "+07 (0) 7782 9137"
             }
