@@ -34,7 +34,7 @@
     "headerv1_layout": "fluid",
     "headerv1_border": false,
     "headerv1_logo": "shopify:\/\/shop_images\/logo.png",
-    "headerv1_logo_mobile": "",
+    "headerv1_logo_mobile": "shopify:\/\/shop_images\/logo.png",
     "headerv1_logo_maxwwidth": "127px",
     "headerv2_layout": "normal",
     "headerv2_logo": "shopify:\/\/shop_images\/logo.png",
