@@ -1,11 +1,15 @@
 <div class="container">
   <div class="banner-header banner-lbook3 space-30">
-    <img src="{% if section.settings.bg_image_breadcrumb == blank %}https://placehold.it/1860x339{% else %}{{section.settings.bg_image_breadcrumb|img_url:'master'}}{% endif %}" alt="Banner-header">
+    <img
+      src="{% if section.settings.bg_image_breadcrumb == blank %}https://placehold.it/1860x339{% else %}{{section.settings.bg_image_breadcrumb|img_url:'master'}}{% endif %}"
+      alt="Banner-header"
+    >
     <div class="text">
       <h3>
         {{ page.title }}
       </h3>
-      <p> <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+      <p>
+        <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
         <i class="fa fa-caret-right"></i>
         {{ page.title }}
       </p>
@@ -17,23 +21,47 @@
   <div class="container container-ver2">
     <div class="row">
       <div class="col-md-5 col-sm-5 col-xs-12">
-        <img class="img-responsive" src="{% if section.settings.bg_image_left == blank %}https://placehold.it/390x600{% else %}{{section.settings.bg_image_left|img_url:'master'}}{% endif %}" alt="">
+        <img
+          class="img-responsive"
+          src="{% if section.settings.bg_image_left == blank %}https://placehold.it/390x600{% else %}{{section.settings.bg_image_left|img_url:'master'}}{% endif %}"
+          alt=""
+        >
       </div>
       <div class="col-md-7 col-sm-7 col-xs-12">
         {% for block in section.blocks %}
-        {% if block.type == "contact" %}
-        <div class="contact-block">
-          <div class="block-img"><img src="{% if block.settings.icon_img == blank %}https://placehold.it/30x20{% else %}{{block.settings.icon_img|img_url:'master'}}{% endif %}" alt=""></div>
-          <div class="block-content">
-            <h3>{{block.settings.ct_title}}</h3>
-            <ul>
-              <li>{{block.settings.ct_label1}}<span>{{block.settings.ct_content1}}</span></li>
-              <li>{{block.settings.ct_label2}}<span>{{block.settings.ct_content2}}</span></li>
-              <li>{{block.settings.ct_label3}}<span>{{block.settings.ct_content3}}</span></li>
-            </ul>
-          </div>
-        </div>
-        {% endif %}
+          {% if block.type == 'contact' %}
+            <div class="contact-block">
+              <div class="block-img">
+                <img
+                  src="{% if block.settings.icon_img == blank %}https://placehold.it/30x20{% else %}{{block.settings.icon_img|img_url:'master'}}{% endif %}"
+                  alt=""
+                >
+              </div>
+              <div class="block-content">
+                <h3>{{ block.settings.ct_title }}</h3>
+                <ul>
+                  <li>
+                    {%- if block.settings.ct_label1 != blank -%}
+                      <span>{{ block.settings.ct_label1 }}</span>
+                    {%- endif -%}
+                    <span>{{ block.settings.ct_content1 }}</span>
+                  </li>
+                  <li>
+                    {%- if block.settings.ct_label2 != blank -%}
+                      <span>{{ block.settings.ct_label2 }}</span>
+                    {%- endif -%}
+                    <span>{{ block.settings.ct_content2 }}</span>
+                  </li>
+                  <li>
+                    {%- if block.settings.ct_label3 != blank -%}
+                      <span>{{ block.settings.ct_label3 }}</span>
+                    {%- endif -%}
+                    <span>{{ block.settings.ct_content3 }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
@@ -48,37 +76,46 @@
       </div>
       <div class="col-md-pull-6 col-sm-6">
         {% form 'contact' %}
-        {% if form.posted_successfully? %}
-        <p class="note form-success">
-          {{ 'contact.form.post_success' | t }}
-        </p>
-        {% endif %}
-        {{ form.errors | default_errors }}
-        <div class="row">
-          <div class="col-md-6 col-sm-6">
-            <label>{{section.settings.title_1}}</label>
-            <input type="text" name="contact[name]" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          {% if form.posted_successfully? %}
+            <p class="note form-success">
+              {{ 'contact.form.post_success' | t }}
+            </p>
+          {% endif %}
+          {{ form.errors | default_errors }}
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <label>{{ section.settings.title_1 }}</label>
+              <input
+                type="text"
+                name="contact[name]"
+                value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              >
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <label>{{ section.settings.title_2 }}</label>
+              <input
+                type="email"
+                name="contact[email]"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                required
+              >
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <label>{{ section.settings.title_3 }}</label>
+              <input type="tel" name="contact[phone]" value="">
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <label>{{ section.settings.title_4 }}</label>
+              <input type="text" name="contact[subject]" value="">
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <label>{{ section.settings.title_5 }}</label>
+              <textarea type="text" name="contact[body]" value=""></textarea>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <button type="submit">{{ section.settings.title_6 }}</button>
+            </div>
           </div>
-          <div class="col-md-6 col-sm-6">
-            <label>{{section.settings.title_2}}</label>
-            <input type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required>
-          </div>
-          <div class="col-md-6 col-sm-6">
-            <label>{{section.settings.title_3}}</label>
-            <input type="tel" name="contact[phone]"  value="">
-          </div>
-          <div class="col-md-6 col-sm-6">
-            <label>{{section.settings.title_4}}</label>
-            <input type="text" name="contact[subject]" value="">
-          </div>
-          <div class="col-md-12 col-sm-12">
-            <label>{{section.settings.title_5}}</label>
-            <textarea type="text" name="contact[body]" value=""></textarea>
-          </div>
-          <div class="col-md-12 col-sm-12">
-            <button type="submit">{{section.settings.title_6}}</button>
-          </div>
-        </div>
         {% endform %}
       </div>
     </div>
@@ -86,30 +123,39 @@
 </div>
 
 {% if section.settings.enable_newsletter %}
-<div class="section-newsletter about-section-newsletter">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="newsletter-wrapper newsletter-v2" style="background-color: {{section.settings.newsletter_bg_color}};">
-          <div class="container container-ver2">
-            <div class="row">
-              <div class="col-md-12">
-                {% if settings.newsletter_form_action != blank %}
-                {% assign form_action = settings.newsletter_form_action %}
-                {% else %}
-                {% assign form_action = '#' %}
-                {% endif %}
+  <div class="section-newsletter about-section-newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            class="newsletter-wrapper newsletter-v2"
+            style="background-color: {{section.settings.newsletter_bg_color}};"
+          >
+            <div class="container container-ver2">
+              <div class="row">
+                <div class="col-md-12">
+                  {% if settings.newsletter_form_action != blank %}
+                    {% assign form_action = settings.newsletter_form_action %}
+                  {% else %}
+                    {% assign form_action = '#' %}
+                  {% endif %}
 
-                <form action="{{form_action}}" class="text-center" method="post">
-                  <label>
-                    <h3>{{section.settings.newletter_title}}</h3>
-                    <p>{{section.settings.newletter_des}}</p>
-                  </label>
-                  <div class="form-group">
-                    <input type="email" name="EMAIL" class="form-control" placeholder="{{section.settings.newletter_placeholder}}">
-                  </div>
-                  <button type="submit" class="link-v1">{{section.settings.newletter_btn_name}}</button>
-                </form>
+                  <form action="{{form_action}}" class="text-center" method="post">
+                    <label>
+                      <h3>{{ section.settings.newletter_title }}</h3>
+                      <p>{{ section.settings.newletter_des }}</p>
+                    </label>
+                    <div class="form-group">
+                      <input
+                        type="email"
+                        name="EMAIL"
+                        class="form-control"
+                        placeholder="{{section.settings.newletter_placeholder}}"
+                      >
+                    </div>
+                    <button type="submit" class="link-v1">{{ section.settings.newletter_btn_name }}</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -117,9 +163,7 @@
       </div>
     </div>
   </div>
-</div>
 {% endif %}
-
 
 {% schema %}
 {
