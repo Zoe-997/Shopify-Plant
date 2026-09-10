@@ -1063,55 +1063,55 @@ $roboto-font-family: {% if settings.font_type == "normal_fonts" %}Roboto{% else 
   }
 }
 
-{%if settings.shop_by_color_text_1 != '' and settings.shop_by_color_1!=''%}
+{% if settings.shop_by_color_text_1 != '' and settings.shop_by_color_1 %}
 .colors .{{settings.shop_by_color_text_1}}
 {
   background-color:{{settings.shop_by_color_1}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_2 != '' and settings.shop_by_color_2!=''%}
+{% if settings.shop_by_color_text_2 != '' and settings.shop_by_color_2 %}
 .colors .{{settings.shop_by_color_text_2}}
 {
   background-color:{{settings.shop_by_color_2}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_3 != '' and settings.shop_by_color_3!=''%}
+{% if settings.shop_by_color_text_3 != '' and settings.shop_by_color_3 %}
 .colors .{{settings.shop_by_color_text_3}}
 {
   background-color:{{settings.shop_by_color_3}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_4 != '' and settings.shop_by_color_4!=''%}
+{% if settings.shop_by_color_text_4 != '' and settings.shop_by_color_4 %}
 .colors .{{settings.shop_by_color_text_4}}
 {
   background-color:{{settings.shop_by_color_4}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_5 != '' and settings.shop_by_color_5!=''%}
+{% if settings.shop_by_color_text_5 != '' and settings.shop_by_color_5 %}
 .colors .{{settings.shop_by_color_text_5}}
 {
   background-color:{{settings.shop_by_color_5}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_6 != '' and settings.shop_by_color_6!=''%}
+{% if settings.shop_by_color_text_6 != '' and settings.shop_by_color_6 %}
 .colors .{{settings.shop_by_color_text_6}}
 {
   background-color:{{settings.shop_by_color_6}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_7 != '' and settings.shop_by_color_7!=''%}
+{% if settings.shop_by_color_text_7 != '' and settings.shop_by_color_7 %}
 .colors .{{settings.shop_by_color_text_7}}
 {
   background-color:{{settings.shop_by_color_7}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_8 != '' and settings.shop_by_color_8!=''%}
+{% if settings.shop_by_color_text_8 != '' and settings.shop_by_color_8 %}
 .colors .{{settings.shop_by_color_text_8}}
 {
   background-color:{{settings.shop_by_color_8}};
 }
 {%endif%}
-{%if settings.shop_by_color_text_9 != '' and settings.shop_by_color_9!=''%}
+{% if settings.shop_by_color_text_9 != '' and settings.shop_by_color_9 %}
 .colors .{{settings.shop_by_color_text_9}}
 {
   background-color:{{settings.shop_by_color_9}};
@@ -5785,4 +5785,37 @@ h1 {
   position: initial;
   padding: 15px 40px;
 }
-{% endif %}
+{% endif %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%if settings.shop_by_color_text_1 != '' and settings.shop_by_color_1!=''%}"
+  to: "{% if settings.shop_by_color_text_1 != '' and settings.shop_by_color_1 %}"
+  position: 24288..24361
+- from: "{%if settings.shop_by_color_text_2 != '' and settings.shop_by_color_2!=''%}"
+  to: "{% if settings.shop_by_color_text_2 != '' and settings.shop_by_color_2 %}"
+  position: 24468..24541
+- from: "{%if settings.shop_by_color_text_3 != '' and settings.shop_by_color_3!=''%}"
+  to: "{% if settings.shop_by_color_text_3 != '' and settings.shop_by_color_3 %}"
+  position: 24648..24721
+- from: "{%if settings.shop_by_color_text_4 != '' and settings.shop_by_color_4!=''%}"
+  to: "{% if settings.shop_by_color_text_4 != '' and settings.shop_by_color_4 %}"
+  position: 24828..24901
+- from: "{%if settings.shop_by_color_text_5 != '' and settings.shop_by_color_5!=''%}"
+  to: "{% if settings.shop_by_color_text_5 != '' and settings.shop_by_color_5 %}"
+  position: 25008..25081
+- from: "{%if settings.shop_by_color_text_6 != '' and settings.shop_by_color_6!=''%}"
+  to: "{% if settings.shop_by_color_text_6 != '' and settings.shop_by_color_6 %}"
+  position: 25188..25261
+- from: "{%if settings.shop_by_color_text_7 != '' and settings.shop_by_color_7!=''%}"
+  to: "{% if settings.shop_by_color_text_7 != '' and settings.shop_by_color_7 %}"
+  position: 25368..25441
+- from: "{%if settings.shop_by_color_text_8 != '' and settings.shop_by_color_8!=''%}"
+  to: "{% if settings.shop_by_color_text_8 != '' and settings.shop_by_color_8 %}"
+  position: 25548..25621
+- from: "{%if settings.shop_by_color_text_9 != '' and settings.shop_by_color_9!=''%}"
+  to: "{% if settings.shop_by_color_text_9 != '' and settings.shop_by_color_9 %}"
+  position: 25728..25801
+{%- endcomment -%}
